@@ -44,9 +44,15 @@ Public template for building a coffee shop on Zalo Mini App. Main features:
    ```
 
 1. Start dev server using `zmp-cli`
+   If you're using `developer`:
+  
+  ```bash
+   npm run dev
+   ```
 
+   If you're using `developer`:
    ```bash
-   zmp start
+   npm start
    ```
 
 1. Open `localhost:3000` on your browser and start coding 🔥
