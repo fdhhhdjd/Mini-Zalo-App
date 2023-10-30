@@ -6,7 +6,13 @@
     "noImplicitAny": false,
     "preserveConstEnums": true,
     "jsx": "react",
-    "lib": ["dom", "es5", "es6", "es7", "es2017"],
+    "lib": [
+      "dom",
+      "es5",
+      "es6",
+      "es7",
+      "es2017"
+    ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "allowJs": true,
@@ -29,6 +35,11 @@
     "resolveJsonModule": true,
     "baseUrl": "src"
   },
-  "exclude": ["node_modules"],
-  "include": ["src"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src",
+    "vite.config.ts"
+  ]
 }
