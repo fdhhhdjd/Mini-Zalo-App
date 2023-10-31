@@ -1,6 +1,5 @@
 import CartPage from "pages/cart";
 import CategoryPage from "pages/category";
-import HomePage from "pages/index";
 import NotificationPage from "pages/notification";
 import ProfilePage from "pages/profile";
 import SearchPage from "pages/search";
@@ -9,8 +8,11 @@ import { Route, Routes } from "react-router";
 import { getSystemInfo } from "zmp-sdk";
 import { Box } from "zmp-ui";
 
+import SuccessPage from "../pages/success";
+
 import { Navigation } from "./navigation";
 import { ScrollRestoration } from "./scroll-restoration";
+import HomePage from "../pages/index";
 
 if (getSystemInfo().platform === "android") {
 	const androidSafeTop = Math.round(
@@ -31,6 +33,7 @@ export const Layout: FC = () => {
 					<Route path="/notification" element={<NotificationPage />}></Route>
 					<Route path="/cart" element={<CartPage />}></Route>
 					<Route path="/profile" element={<ProfilePage />}></Route>
+					<Route path="/success" element={<SuccessPage />}></Route>
 				</Routes>
 			</Box>
 			<Navigation />
