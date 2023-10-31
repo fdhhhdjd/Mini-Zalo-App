@@ -29,7 +29,7 @@ class HttpClient {
 	setInterceptorRequest() {
 		return this.INSTANCE.interceptors.request.use(
 			async (config) => {
-				this.TOKEN = ""; // your token;
+				this.TOKEN = process.env.API_TOKEN; // your token;
 				if (this.TOKEN) {
 					config.headers.Authorization = `Bearer ${this.TOKEN}`;
 				}

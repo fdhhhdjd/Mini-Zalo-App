@@ -1,32 +1,52 @@
-import React, { FC } from "react";
-import { Pagination } from "swiper";
+//* LIB
+import { BannerItemSkeleton } from "components/skeletons";
+import useStoreBanner from "hooks/useSelectorBanner";
+import React from "react";
+import { useDispatch } from "react-redux";
+//* IMPORT
+import { getBannerInitiate } from "redux/banner/Actions";
+import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { getDummyImage } from "utils/product";
 import { Box } from "zmp-ui";
 
-export const Banner: FC = () => {
-  return (
-    <Box className="bg-white" pb={4}>
-      <Swiper
-        modules={[Pagination]}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay
-        loop
-        cssMode
-      >
-        {[1, 2, 3, 4, 5]
-          .map((i) => getDummyImage(`banner-${i}.jpg`))
-          .map((banner, i) => (
-            <SwiperSlide key={i} className="px-4">
-              <Box
-                className="w-full rounded-lg aspect-[2/1] bg-cover bg-center bg-skeleton"
-                style={{ backgroundImage: `url(${banner})` }}
-              />
-            </SwiperSlide>
-          ))}
-      </Swiper>
-    </Box>
-  );
+export const Banner: React.FC = () => {
+	const dispatch = useDispatch();
+
+	const { banners, isLoading } = useStoreBanner();
+
+	React.useEffect(() => {
+		dispatch(getBannerInitiate());
+	}, []);
+
+	return (
+		<Box className="bg-white" pb={4}>
+			{isLoading ? (
+				<BannerItemSkeleton />
+			) : (
+				<Swiper
+					modules={[Autoplay, Pagination]}
+					pagination={{
+						clickable: true
+					}}
+					centeredSlides={true}
+					autoplay={{
+						delay: 2500,
+						disableOnInteraction: false
+					}}
+					loop={true}
+					cssMode
+				>
+					{Array.isArray(banners) &&
+						banners.map((banner, i) => (
+							<SwiperSlide key={i} className="px-4">
+								<Box
+									className="w-full rounded-lg aspect-[2/1] bg-cover bg-center bg-skeleton"
+									style={{ backgroundImage: `url(${banner.fields.image})` }}
+								/>
+							</SwiperSlide>
+						))}
+				</Swiper>
+			)}
+		</Box>
+	);
 };

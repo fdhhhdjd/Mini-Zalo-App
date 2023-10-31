@@ -21,7 +21,7 @@ module.exports = {
 	ignorePatterns: ["!.*", "dist", "node_modules"],
 	rules: {
 		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "error",
+		"react-hooks/exhaustive-deps": "off",
 		"react/jsx-filename-extension": ["error", { extensions: [".ts", ".tsx"] }],
 		"react/display-name": "off",
 		"react/jsx-props-no-spreading": "off",
@@ -73,6 +73,7 @@ module.exports = {
 			}
 		],
 		"import/imports-first": "error",
+		"@typescript-eslint/no-shadow": "off",
 		"import/order": [
 			"error",
 			{

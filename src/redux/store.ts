@@ -10,7 +10,8 @@ import rootReducer from "./rootReducer";
 
 const middleware = [thunk];
 
-if (process.env.NODE_APP === APP_NODE.DEV) {
+const shouldEnvironment = process.env.NODE_APP === APP_NODE.DEV;
+if (shouldEnvironment) {
 	middleware.push(logger);
 }
 

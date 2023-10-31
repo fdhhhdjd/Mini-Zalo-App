@@ -6,5 +6,8 @@ export const APP_NODE = {
 export const TABLE = {
 	CATEGORIES: "tblFLf10xiccFiduE",
 	PRODUCT: "tblswStnGlTYz5B5e",
-	ORDER: "tbl1yFvIS5tZviAwY"
+	ORDER: "tbl1yFvIS5tZviAwY",
+	BANNER: "tblKBzzfkCqqQgetM"
 };
+
+export const BASE_ID = "apphCRzZ88qQxnHGM";

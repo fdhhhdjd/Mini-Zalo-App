@@ -1,12 +1,9 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable jsx-a11y/alt-text */
 //* LIB
-// import useStoreTodo from "hooks/useSelectorPlace";
-import React, { FC } from "react";
+import React from "react";
 import { useRecoilValueLoadable } from "recoil";
-// eslint-disable-next-line import/order
 import { userState } from "state";
-
 //* IMPORT
 import logo from "static/logo.png";
 import { getConfig } from "utils/config";
@@ -14,12 +11,11 @@ import { Box, Header, Text } from "zmp-ui";
 
 import appConfig from "../../../app-config.json";
 
-export const Welcome: FC = () => {
+export const Welcome: React.FC = () => {
 	const user = useRecoilValueLoadable(userState);
 
-	console.log(user);
 	return (
-		<>
+		<React.Fragment>
 			<Header
 				className="app-header no-border pl-4 flex-none pb-[6px]"
 				showBackIcon={false}
@@ -44,6 +40,6 @@ export const Welcome: FC = () => {
 					) as unknown as string
 				}
 			/>
-		</>
+		</React.Fragment>
 	);
 };
