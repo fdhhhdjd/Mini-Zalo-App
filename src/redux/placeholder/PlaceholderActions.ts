@@ -1,8 +1,5 @@
-//* LIB
-// eslint-disable-next-line import/order
-import axios from "axios";
-
 //* IMPORT
+import { HttpClient } from "services";
 import { ResponseData, PlaceHolderItem } from "types/Placeholder";
 
 import { TYPES } from "./PlaceholderTypes";
@@ -36,7 +33,7 @@ export const getPlaceholderInitiate = (): any => {
 		try {
 			dispatch(getDataPlacePending());
 
-			const response: ResponseData = await axios.get("https://jsonplaceholder.typicode.com/todos");
+			const response: ResponseData = await HttpClient.getMethod(`${process.env.API_SERVER_DEMO}`);
 
 			dispatch(getDataPlaceSuccess(response.data));
 		} catch (error: unknown) {
