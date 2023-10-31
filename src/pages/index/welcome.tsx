@@ -3,31 +3,21 @@
 //* LIB
 // import useStoreTodo from "hooks/useSelectorPlace";
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
 import { useRecoilValueLoadable } from "recoil";
-import { getPlaceholderInitiate } from "redux/placeholder/PlaceholderActions";
 // eslint-disable-next-line import/order
 import { userState } from "state";
 
 //* IMPORT
 import logo from "static/logo.png";
 import { getConfig } from "utils/config";
-import { Box, Button, Header, Text } from "zmp-ui";
+import { Box, Header, Text } from "zmp-ui";
 
 import appConfig from "../../../app-config.json";
 
 export const Welcome: FC = () => {
 	const user = useRecoilValueLoadable(userState);
 
-	const dispatch = useDispatch();
-
-	const handleGetApiPlaceholder = () => {
-		dispatch(getPlaceholderInitiate());
-	};
-	// const { todos } = useStoreTodo();
-
-	// console.info(todos);
-
+	console.log(user);
 	return (
 		<>
 			<Header
@@ -54,7 +44,6 @@ export const Welcome: FC = () => {
 					) as unknown as string
 				}
 			/>
-			<Button onClick={handleGetApiPlaceholder}>Get api placeholder</Button>
 		</>
 	);
 };
