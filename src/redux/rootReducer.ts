@@ -3,11 +3,11 @@ import { combineReducers } from "redux";
 
 //* IMPORT
 import BannerReducer from "./banner/Reducer";
-import todoReducer from "./placeholder/PlaceholderReducer";
+import StoreReducer from "./store/Reducer";
 
 const rootReducer = combineReducers({
-	todos: todoReducer,
-	banners: BannerReducer
+	banners: BannerReducer,
+	stores: StoreReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -39,6 +39,7 @@ module.exports = {
 		"@typescript-eslint/prefer-enum-initializers": "error",
 		"no-undef": "off",
 		"no-unused-vars": "off",
+		"no-case-declarations": "off",
 		"@typescript-eslint/no-unused-vars": "error",
 		"no-mixed-spaces-and-tabs": "off",
 		"react-native/no-inline-styles": "off",

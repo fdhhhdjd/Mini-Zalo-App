@@ -374,20 +374,6 @@ export const nearbyStoresState = selector({
 	}
 });
 
-export const selectedStoreIndexState = atom({
-	key: "selectedStoreIndex",
-	default: 0
-});
-
-export const selectedStoreState = selector({
-	key: "selectedStore",
-	get: ({ get }) => {
-		const index = get(selectedStoreIndexState);
-		const stores = get(nearbyStoresState);
-		return stores[index];
-	}
-});
-
 export const selectedDeliveryTimeState = atom({
 	key: "selectedDeliveryTime",
 	default: +new Date()

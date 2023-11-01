@@ -1,39 +1,48 @@
 import { ActionSheet } from "components/fullscreen-sheet";
 import { ListItem } from "components/list-item";
-import React, { FC, useState } from "react";
+import useStores from "hooks/useSelectorStore";
+import React, { FC, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useRecoilValue, useRecoilValueLoadable, useSetRecoilState } from "recoil";
-import { nearbyStoresState, requestLocationTriesState, selectedStoreIndexState, selectedStoreState } from "state";
-import { Store } from "types/delivery";
+import { useDispatch } from "react-redux";
+import { getPlaceholderInitiate } from "redux/store/Actions";
+import { StoreItem } from "types/store";
 import { displayDistance } from "utils/location";
 
 export const StorePicker: FC = () => {
-	const [isVisible, setVisible] = useState(false);
-	const nearbyStores = useRecoilValueLoadable(nearbyStoresState);
-	const setSelectedStoreIndex = useSetRecoilState(selectedStoreIndexState);
-	const selectedStore = useRecoilValue(selectedStoreState);
+	const { store } = useStores();
 
-	if (!selectedStore) {
-		return <RequestStorePickerLocation />;
-	}
+	const [isVisible, setVisible] = useState(false);
+	const [selected, setSelected] = useState<StoreItem>();
+	const dispatch = useDispatch();
+
+	const handleSelectedStoreIndex = (index: number) => {
+		setSelected(store[index]);
+	};
+
+	useEffect(() => {
+		if (isVisible) dispatch(getPlaceholderInitiate());
+	}, [isVisible]);
 
 	return (
 		<>
-			<ListItem onClick={() => setVisible(true)} title={selectedStore.name} subtitle={selectedStore.address} />
-			{nearbyStores.state === "hasValue" &&
+			<ListItem
+				onClick={() => setVisible(true)}
+				title={selected ? selected?.fields.name : "Chọn cửa hàng"}
+				subtitle={selected ? selected?.fields.address : "Yêu cầu truy cập vị trí"}
+			/>
+			{store.length > 0 &&
 				createPortal(
 					<ActionSheet
 						title="Các cửa hàng ở gần bạn"
 						visible={isVisible}
 						onClose={() => setVisible(false)}
 						actions={[
-							nearbyStores.contents.map((store: Store & { distance?: number }, i) => ({
-								text: store.distance
-									? `${store.name} - ${displayDistance(store.distance)}`
-									: store.name,
-								highLight: store.id === selectedStore?.id,
+							store.map((store: StoreItem & { fields: { distance?: number } }, i) => ({
+								text: store.fields.distance
+									? `${store.fields.name} - ${displayDistance(store.fields.distance)}`
+									: store.fields.name,
 								onClick: () => {
-									setSelectedStoreIndex(i);
+									handleSelectedStoreIndex(i);
 								}
 							})),
 							[{ text: "Đóng", close: true, danger: true }]
@@ -43,9 +52,4 @@ export const StorePicker: FC = () => {
 				)}
 		</>
 	);
-};
-
-export const RequestStorePickerLocation: FC = () => {
-	const retry = useSetRecoilState(requestLocationTriesState);
-	return <ListItem onClick={() => retry((r) => r + 1)} title="Chọn cửa hàng" subtitle="Yêu cầu truy cập vị trí" />;
 };

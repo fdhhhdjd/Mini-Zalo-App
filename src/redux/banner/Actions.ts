@@ -28,7 +28,7 @@ const getDataBannerError = (error: Error) => {
 	} as const;
 };
 
-// Action thunk Get data for placeholder
+// Action thunk Get data for Banner
 export const getBannerInitiate = (): any => {
 	return async (dispatch: (arg0: { type: TYPES; payload?: BannerItem | Error }) => void) => {
 		try {
