@@ -28,6 +28,14 @@ export const BannerItemSkeleton: FC = () => {
 	);
 };
 
+export const NotifyItemSkeleton: FC = () => {
+	return (
+		<div className="space-y-2">
+			<ImageSkeleton className="w-full rounded-lg aspect-[2/1] bg-cover bg-center bg-skeleton" />
+		</div>
+	);
+};
+
 export const ProductSlideSkeleton: FC = () => {
 	return (
 		<div className="space-y-3">

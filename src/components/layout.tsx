@@ -8,11 +8,11 @@ import { Route, Routes } from "react-router";
 import { getSystemInfo } from "zmp-sdk";
 import { Box } from "zmp-ui";
 
+import HomePage from "../pages/index";
 import SuccessPage from "../pages/success";
 
 import { Navigation } from "./navigation";
 import { ScrollRestoration } from "./scroll-restoration";
-import HomePage from "../pages/index";
 
 if (getSystemInfo().platform === "android") {
 	const androidSafeTop = Math.round(

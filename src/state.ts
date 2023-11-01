@@ -6,11 +6,9 @@ import foodIcon from "static/category-food.svg";
 import juiceIcon from "static/category-juice.svg";
 import matchaIcon from "static/category-matcha.svg";
 import milkteaIcon from "static/category-milktea.svg";
-import logo from "static/logo.png";
 import { Cart } from "types/cart";
 import { Category, CategoryId } from "types/category";
 import { Store } from "types/delivery";
-import { Notification } from "types/notification";
 import { Product, Variant } from "types/product";
 import { wait } from "utils/async";
 import { calculateDistance } from "utils/location";
@@ -270,24 +268,6 @@ export const totalPriceState = selector({
 		const cart = get(cartState);
 		return cart.reduce((total, item) => total + item.quantity * calcFinalPrice(item.product, item.options), 0);
 	}
-});
-
-export const notificationsState = atom<Notification[]>({
-	key: "notifications",
-	default: [
-		{
-			id: 1,
-			image: logo,
-			title: "Chào bạn mới",
-			content: "Cảm ơn đã sử dụng ZaUI Coffee, bạn có thể dùng ứng dụng này để tiết kiệm thời gian xây dựng"
-		},
-		{
-			id: 2,
-			image: logo,
-			title: "Giảm 50% lần đầu mua hàng",
-			content: "Nhập WELCOME để được giảm 50% giá trị đơn hàng đầu tiên order"
-		}
-	]
 });
 
 export const keywordState = atom({
