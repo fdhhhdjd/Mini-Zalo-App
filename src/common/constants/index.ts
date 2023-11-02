@@ -28,3 +28,12 @@ export const STATUS_NOTIFY = {
 	_BEST_SALE: "2",
 	_ORDER_SUCCESS: "3"
 };
+
+export const TYPE_SALE_STRING = {
+	FIXED: "fixed",
+	PRESENT: "percent"
+};
+export const TYPE_SALE_NUMBER = {
+	FIXED: 10,
+	PRESENT: 20
+};

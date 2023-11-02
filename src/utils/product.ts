@@ -1,3 +1,5 @@
+import { TYPE_SALE_NUMBER, TYPE_SALE_STRING } from "common/constants";
+import _ from "lodash";
 import { SelectedOptions } from "types/cart";
 import { Option, Product } from "types/product";
 import { createOrder } from "zmp-sdk";
@@ -17,7 +19,8 @@ export function calcFinalPrice(product: Product, options?: SelectedOptions) {
 	if (options && product.variants) {
 		const selectedOptions: Option[] = [];
 		for (const variantKey in options) {
-			const variant = product.variants.find((v) => v.key === variantKey);
+			const parserProduct = product.variants;
+			const variant = parserProduct?.find((v) => v.key === variantKey);
 			if (variant) {
 				const currentOption = options[variantKey];
 				if (typeof currentOption === "string") {
@@ -74,17 +77,34 @@ export function isIdentical(option1: SelectedOptions, option2: SelectedOptions) 
 	return true;
 }
 
-const pay = (amount: number, description?: string) =>
-	createOrder({
+export const getStatusType = (status: string) => {
+	const typeNumber = _.toNumber(status);
+	switch (typeNumber) {
+		case TYPE_SALE_NUMBER.FIXED:
+			return TYPE_SALE_STRING.FIXED;
+		case TYPE_SALE_NUMBER.PRESENT:
+			return TYPE_SALE_STRING.PRESENT;
+		default:
+			return "unknown";
+	}
+};
+
+export const recommendProductsState = (products) => {
+	return products.filter((p) => p.fields.sale);
+};
+
+const pay = (amount: number, description?: string) => {
+	return createOrder({
 		desc: description ?? `Thanh toán cho ${getConfig((config) => config.app.title)}`,
 		item: [],
 		amount: amount,
 		success: (data) => {
-			console.log("Payment success: ", data);
+			console.info("Payment success: ", data);
 		},
 		fail: (err) => {
-			console.log("Payment error: ", err);
+			console.info("Payment error: ", err);
 		}
 	});
+};
 
 export default pay;

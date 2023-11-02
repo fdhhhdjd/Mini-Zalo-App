@@ -5,7 +5,7 @@ import { combineReducers } from "redux";
 import BannerReducer from "./banner/Reducer";
 import CartReducer from "./cart/Reducer";
 import NotifyReducer from "./notification/Reducer";
-import ProductReducer from "./product/ProductReducer";
+import ProductReducer from "./product/Reducer";
 import ResultProductReducer from "./search/Reducer";
 import StoreReducer from "./store/Reducer";
 const rootReducer = combineReducers({

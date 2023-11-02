@@ -1,5 +1,5 @@
 //* IMPORT
-import { TYPES } from "redux/product/ProductTypes";
+import { TYPES } from "redux/product/Types";
 
 import { CategoryId } from "./category";
 
@@ -53,7 +53,7 @@ export interface Product {
 	categoryId: CategoryId[];
 	description?: string;
 	sale?: Sale;
-	variants?: Variant[];
+	variants?: any;
 }
 
 export interface ProductItems {

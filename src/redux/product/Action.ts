@@ -3,7 +3,7 @@ import { BASE_ID, TABLE } from "common/constants";
 import { HttpClient } from "services";
 import { ProductItems, ResponseProductData } from "types/product";
 
-import { TYPES } from "./ProductTypes";
+import { TYPES } from "./Types";
 
 //* Started pending
 const getDataProductPending = () => {

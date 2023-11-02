@@ -6,14 +6,13 @@ import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { getCartSuccessAction } from "redux/cart/Actions";
 import { SelectedOptions } from "types/cart";
-import { Product, ProductItems } from "types/product";
+import { Product } from "types/product";
 import { isIdentical } from "utils/product";
 import { Box, Button, Text } from "zmp-ui";
 
 import { MultipleOptionPicker } from "./multiple-option-picker";
 import { QuantityPicker } from "./quantity-picker";
 import { SingleOptionPicker } from "./single-option-picker";
-
 
 export interface ProductPickerProps {
 	product?: Product;
@@ -25,8 +24,9 @@ export interface ProductPickerProps {
 }
 
 function getDefaultOptions(product?: Product) {
-	if (product && product.variants) {
-		return product.variants.reduce(
+	const parseProduct = product?.variants;
+	if (product && parseProduct) {
+		return parseProduct.reduce(
 			(options, variant) =>
 				Object.assign(options, {
 					[variant.key]: variant.default
@@ -66,7 +66,7 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 				} else {
 					const existed = cartData.find(
 						(item, i) =>
-						    i !== cartData.indexOf(editing) &&
+							i !== cartData.indexOf(editing) &&
 							item.product.id === product.id &&
 							isIdentical(item.options, options)
 					)!;
@@ -127,7 +127,7 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 							</Box>
 							<Box className="space-y-5">
 								{product.variants &&
-									product.variants.map((variant) =>
+									product.variants?.map((variant) =>
 										variant.type === "single" ? (
 											<SingleOptionPicker
 												key={variant.key}

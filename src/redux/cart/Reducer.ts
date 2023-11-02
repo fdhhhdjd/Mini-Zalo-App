@@ -4,7 +4,7 @@ import { calcFinalPrice } from "utils/product";
 
 import { TYPES } from "./Types";
 
-const cartLocal = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE.KEY_CART) || "");
+const cartLocal = [] || JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE.KEY_CART) || "");
 
 const initCartState: InitialDefaultCart = {
 	cart: cartLocal,

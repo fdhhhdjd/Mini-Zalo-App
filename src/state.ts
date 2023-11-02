@@ -226,14 +226,6 @@ export const productsState = selector<Product[]>({
 	}
 });
 
-export const recommendProductsState = selector<Product[]>({
-	key: "recommendProducts",
-	get: ({ get }) => {
-		const products = get(productsState);
-		return products.filter((p) => p.sale);
-	}
-});
-
 export const selectedCategoryIdState = atom({
 	key: "selectedCategoryId",
 	default: "coffee"
