@@ -14,6 +14,10 @@ export const TABLE = {
 
 export const BASE_ID = "apphCRzZ88qQxnHGM";
 
+export const KEY_LOCAL_STORAGE = {
+	KEY_CART: "CartProduct"
+};
+
 export const LOCATION = {
 	LATITUDE: "10.7287",
 	LONGITUDE: "106.7317"

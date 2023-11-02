@@ -1,9 +1,10 @@
 import { FinalPrice } from "components/display/final-price";
 import { Sheet } from "components/fullscreen-sheet";
+import useSelectorCart from "hooks/useSelectorCart";
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useSetRecoilState } from "recoil";
-import { cartState } from "state";
+import { useDispatch } from "react-redux";
+import { getCartSuccessAction } from "redux/cart/Actions";
 import { SelectedOptions } from "types/cart";
 import { Product } from "types/product";
 import { isIdentical } from "utils/product";
@@ -12,6 +13,7 @@ import { Box, Button, Text } from "zmp-ui";
 import { MultipleOptionPicker } from "./multiple-option-picker";
 import { QuantityPicker } from "./quantity-picker";
 import { SingleOptionPicker } from "./single-option-picker";
+
 
 export interface ProductPickerProps {
 	product?: Product;
@@ -39,7 +41,9 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 	const [isVisible, setVisible] = useState(false);
 	const [options, setOptions] = useState<SelectedOptions>(selected ? selected.options : getDefaultOptions(product));
 	const [quantity, setQuantity] = useState(1);
-	const setCart = useSetRecoilState(cartState);
+	const dispatch = useDispatch();
+	const cart = useSelectorCart();
+	const cartData = cart.cart;
 
 	useEffect(() => {
 		if (selected) {
@@ -50,51 +54,51 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 
 	const addToCart = () => {
 		if (product) {
-			setCart((cart) => {
-				let res = [...cart];
-				if (selected) {
-					// updating an existing cart item, including quantity and size, or remove it if new quantity is 0
-					const editing = cart.find(
-						(item) => item.product.id === product.id && isIdentical(item.options, selected.options)
-					)!;
-					if (quantity === 0) {
-						res.splice(cart.indexOf(editing), 1);
-					} else {
-						const existed = cart.find(
-							(item, i) =>
-								i !== cart.indexOf(editing) &&
-								item.product.id === product.id &&
-								isIdentical(item.options, options)
-						)!;
-						res.splice(cart.indexOf(editing), 1, {
-							...editing,
-							options,
-							quantity: existed ? existed.quantity + quantity : quantity
-						});
-						if (existed) {
-							res.splice(cart.indexOf(existed), 1);
-						}
-					}
+			// eslint-disable-next-line react-hooks/rules-of-hooks
+			let res = [...cartData];
+			if (selected) {
+				// updating an existing cart item, including quantity and size, or remove it if new quantity is 0
+				const editing = cartData.find(
+					(item) => item.product.id === product.id && isIdentical(item.options, selected.options)
+				)!;
+				if (quantity === 0) {
+					res.splice(cartData.indexOf(editing), 1);
 				} else {
-					// adding new item to cart, or merging if it already existed before
-					const existed = cart.find(
-						(item) => item.product.id === product.id && isIdentical(item.options, options)
-					);
+					const existed = cartData.find(
+						(item, i) =>
+						    i !== cartData.indexOf(editing) &&
+							item.product.id === product.id &&
+							isIdentical(item.options, options)
+					)!;
+					res.splice(cartData.indexOf(editing), 1, {
+						...editing,
+						options,
+						quantity: existed ? existed.quantity + quantity : quantity
+					});
 					if (existed) {
-						res.splice(cart.indexOf(existed), 1, {
-							...existed,
-							quantity: existed.quantity + quantity
-						});
-					} else {
-						res = res.concat({
-							product,
-							options,
-							quantity
-						});
+						res.splice(cartData.indexOf(existed), 1);
 					}
 				}
-				return res;
-			});
+			} else {
+				// adding new item to cart, or merging if it already existed before
+				const existed = cartData.find(
+					(item) => item.product.id === product.id && isIdentical(item.options, options)
+				);
+				if (existed) {
+					res.splice(cartData.indexOf(existed), 1, {
+						...existed,
+						quantity: existed.quantity + quantity
+					});
+				} else {
+					res = res.concat({
+						product,
+						options,
+						quantity
+					});
+				}
+			}
+
+			dispatch(getCartSuccessAction(res));
 		}
 		setVisible(false);
 	};

@@ -1,24 +1,30 @@
+import { KEY_LOCAL_STORAGE } from "common/constants";
 import { FinalPrice } from "components/display/final-price";
 import { DisplaySelectedOptions } from "components/display/selected-options";
 import { ListRenderer } from "components/list-renderer";
 import { ProductPicker } from "components/product/picker";
-import React, { FC, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { cartState } from "state";
+import useSelectorCart from "hooks/useSelectorCart";
+import React, { FC, useEffect, useState } from "react";
 import { CartItem } from "types/cart";
 import { Box, Text } from "zmp-ui";
 
+
 export const CartItems: FC = () => {
-	const cart = useRecoilValue(cartState);
+	const cart = useSelectorCart();
+	const cartData = cart.cart;
 	const [editingItem, setEditingItem] = useState<CartItem | undefined>();
+
+    useEffect(() => {
+		localStorage.setItem(KEY_LOCAL_STORAGE.KEY_CART, JSON.stringify(cartData));
+	}, [cartData]);
 
 	return (
 		<Box className="py-3 px-4">
-			{cart.length > 0 ? (
+			{cartData.length > 0 ? (
 				<ProductPicker product={editingItem?.product} selected={editingItem}>
 					{({ open }) => (
 						<ListRenderer
-							items={cart}
+							items={cartData}
 							limit={3}
 							onClick={(item) => {
 								setEditingItem(item);
