@@ -1,6 +1,7 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable jsx-a11y/alt-text */
 
+import { CategoryItemSkeleton } from "components/skeletons";
 import useStoreCategories from "hooks/useSelectorCategories";
 import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -13,7 +14,7 @@ import { Box, Text } from "zmp-ui";
 export const CategoriesDev: FC = () => {
 	const dispatch = useDispatch();
 
-	const { categories } = useStoreCategories();
+	const { categories, isLoading } = useStoreCategories();
 
 	useEffect(() => {
 		dispatch(getCategoriesInitiate());
@@ -29,7 +30,10 @@ export const CategoriesDev: FC = () => {
 
 	return (
 		<Box className="bg-white grid grid-cols-4 gap-4 p-4">
-			{categories &&
+			{isLoading ? (
+				<CategoryItemSkeleton />
+			) : (
+				categories &&
 				categories.map((category, i) => (
 					// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
 					<div
@@ -42,7 +46,8 @@ export const CategoriesDev: FC = () => {
 							{category.fields.name}
 						</Text>
 					</div>
-				))}
+				))
+			)}
 		</Box>
 	);
 };

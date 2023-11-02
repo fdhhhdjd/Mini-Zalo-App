@@ -60,3 +60,11 @@ export const ProductSearchResultSkeleton: FC = () => {
 		</div>
 	);
 };
+
+export const CategoryItemSkeleton: FC = () => {
+	return (
+		<div className="space-y-2">
+			<ImageSkeleton className="w-full rounded-lg aspect-[2/1] bg-cover bg-center bg-skeleton" />
+		</div>
+	);
+};

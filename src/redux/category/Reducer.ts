@@ -20,7 +20,7 @@ const CategoriesReducer = (
 		case TYPES.GET_CATEGORY_PENDING:
 			return {
 				...state,
-				loading: true
+				isLoading: true
 			};
 
 		// Todo: 2. Success
@@ -28,14 +28,14 @@ const CategoriesReducer = (
 			return {
 				...state,
 				categories: payload,
-				loading: false
+				isLoading: false
 			};
 		// Todo: 3. Error
 		case TYPES.GET_CATEGORY_ERROR:
 			return {
 				...state,
 				error: payload,
-				loading: false
+				isLoading: false
 			};
 		default:
 			return {
