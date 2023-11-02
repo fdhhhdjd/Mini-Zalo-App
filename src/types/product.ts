@@ -66,7 +66,7 @@ export interface ProductField {
 	price: number;
 }
 export interface InitialProdInterface {
-	loading: boolean;
+	isLoading: boolean;
 	products: ProductItems[];
 	error: Error | null;
 }

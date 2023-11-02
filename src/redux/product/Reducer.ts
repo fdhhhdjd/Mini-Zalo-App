@@ -1,13 +1,13 @@
 //* IMPORT
+import { TYPE_SALE_STRING } from "common/constants";
 import { InitialProdInterface, ProductAction } from "types/product";
 import { parseData } from "utils/convert";
 import { getStatusType } from "utils/product";
 
 import { TYPES } from "./Types";
-import { TYPE_SALE_STRING } from "common/constants";
 
 const initialState = {
-	loading: false,
+	isLoading: false,
 	products: [],
 	error: null
 } as InitialProdInterface;
@@ -18,7 +18,7 @@ const ProductReducer = (state: InitialProdInterface = initialState, action: Prod
 		case TYPES.GET_PRODUCT_PENDING:
 			return {
 				...state,
-				loading: true
+				isLoading: true
 			};
 		case TYPES.GET_PRODUCT_SUCCESS:
 			const productsWithParsedVariants = payload?.map((product) => {
@@ -49,13 +49,13 @@ const ProductReducer = (state: InitialProdInterface = initialState, action: Prod
 			return {
 				...state,
 				products: productsWithParsedVariants,
-				loading: false
+				isLoading: false
 			};
 		case TYPES.GET_PRODUCT_ERROR:
 			return {
 				...state,
-				loading: false,
-				error: payload
+				error: payload,
+				isLoading: false
 			};
 		default:
 			return {

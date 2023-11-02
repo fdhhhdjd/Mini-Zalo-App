@@ -60,12 +60,15 @@ export const RecommendContent: FC = () => {
 };
 
 export const RecommendFallback: FC = () => {
-	const recommendProducts = [...new Array(3)];
+	const { products } = useStoreProduct();
+	const recommendProducts = recommendProductsState(products);
+
+	const recommendProductsNew = [...new Array(recommendProducts.length)];
 
 	return (
 		<Section title="Gợi ý cho bạn" padding="title-only">
 			<Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
-				{recommendProducts.map((_, i) => (
+				{recommendProductsNew.map((_, i) => (
 					<SwiperSlide key={i}>
 						<ProductSlideSkeleton />
 					</SwiperSlide>
@@ -76,9 +79,8 @@ export const RecommendFallback: FC = () => {
 };
 
 export const Recommend: FC = () => {
+	const { isLoading } = useStoreProduct();
 	return (
-		<Suspense fallback={<RecommendFallback />}>
-			<RecommendContent />
-		</Suspense>
+		<Suspense fallback={<RecommendFallback />}>{isLoading ? <RecommendFallback /> : <RecommendContent />}</Suspense>
 	);
 };
