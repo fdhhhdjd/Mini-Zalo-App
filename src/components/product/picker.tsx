@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { getCartSuccessAction } from "redux/cart/Actions";
 import { SelectedOptions } from "types/cart";
-import { Product } from "types/product";
+import { Product, ProductItems } from "types/product";
 import { isIdentical } from "utils/product";
 import { Box, Button, Text } from "zmp-ui";
 

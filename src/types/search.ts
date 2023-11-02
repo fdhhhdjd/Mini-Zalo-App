@@ -1,7 +1,5 @@
-//* IMPORT
-import { TYPES } from "redux/product/ProductTypes";
-
 import { CategoryId } from "./category";
+import { TYPES } from "redux/search/Types";
 
 export type ResponseProductData = {
 	data: {
@@ -56,24 +54,14 @@ export interface Product {
 	variants?: Variant[];
 }
 
-export interface ProductItems {
-	id: number | string;
-	fields: ProductField;
-}
 export interface ProductField {
 	image: string;
 	name: string;
 	price: number;
 }
-export interface InitialProdInterface {
-	loading: boolean;
-	products: ProductItems[];
-	error: Error | null;
-}
 export interface InitialInterface {
-	isLoading: boolean;
-	products: ProductItem[];
-	productsResult: ProductItem[];
+	loading: boolean;
+	resultProduct: ProductItem[];
 	error: Error | null;
 }
 
@@ -94,7 +82,7 @@ export interface ProductItem {
 }
 
 export type ProductAction<T> = {
-	type: typeof TYPES.GET_PRODUCT_PENDING | typeof TYPES.GET_PRODUCT_SUCCESS | typeof TYPES.GET_PRODUCT_ERROR;
+	type: typeof TYPES.SEARCH_PRODUCT_PENDING | typeof TYPES.SEARCH_PRODUCT_SUCCESS | typeof TYPES.SEARCH_PRODUCT_ERROR;
 	payload?: T;
 };
 

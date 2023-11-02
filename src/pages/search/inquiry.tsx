@@ -1,18 +1,14 @@
-import React, { FC, useCallback } from "react";
-import { useRecoilState } from "recoil";
-import { keywordState } from "state";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { Box, Input } from "zmp-ui";
-
+import useSearchProducts from "hooks/useSearchProducts";
 export const Inquiry: FC = () => {
-	const [keyword, setKeyword] = useRecoilState(keywordState);
-
+	const { debouncedSearch, keySearch } = useSearchProducts();
 	const handleChange = useCallback(
 		(key: string) => {
-			setKeyword(key);
+			debouncedSearch(key);
 		},
-		[setKeyword]
+		[keySearch]
 	);
-
 	return (
 		<Box
 			p={4}
@@ -34,7 +30,7 @@ export const Inquiry: FC = () => {
 						el?.focus();
 					}
 				}}
-				defaultValue={keyword}
+				defaultValue={keySearch}
 				onChange={(e) => handleChange(e.target.value)}
 				placeholder="Tìm nhanh đồ uống, món mới ..."
 				clearable

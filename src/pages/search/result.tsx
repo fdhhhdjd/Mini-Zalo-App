@@ -3,30 +3,34 @@
 import { FinalPrice } from "components/display/final-price";
 import { ProductPicker } from "components/product/picker";
 import { ProductSearchResultSkeleton } from "components/skeletons";
+import useSearchProducts, { useSelectSearch } from "hooks/useSearchProducts";
+import { isArray } from "lodash";
 import React, { FC, Suspense } from "react";
 import { useRecoilValue } from "recoil";
 import { resultState } from "state";
 import { Box, Text } from "zmp-ui";
+import { ProductItem } from "types/product";
 
-const SearchResultContent: FC = () => {
-	const result = useRecoilValue(resultState);
+const SearchResultContent: FC<{ products: ProductItem[] | [] }> = ({ products }) => {
+	// const result = useRecoilValue(resultState);
+
 	return (
 		<Box flex flexDirection="column" className="bg-background flex-1 min-h-0">
 			<Text.Title className="p-4 pt-0" size="small">
-				Kết quả ({result.length})
+				Kết quả ({isArray(products) ? products.length : 0})
 			</Text.Title>
-			{result.length > 0 ? (
+			{isArray(products) && products.length > 0 ? (
 				<Box className="p-4 pt-0 space-y-4 flex-1 overflow-y-auto">
-					{result.map((product) => (
-						<ProductPicker key={product.id} product={product}>
+					{products.map((product) => (
+						<ProductPicker key={product.id} product={product.fields}>
 							{({ open }) => (
 								// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
 								<div onClick={open} className="flex items-center space-x-4">
-									<img className="w-[88px] h-[88px] rounded-lg" src={product.image} />
+									<img className="w-[88px] h-[88px] rounded-lg" src={product.fields.image} />
 									<Box className="space-y-2">
-										<Text>{product.name}</Text>
+										<Text>{product.fields.name}</Text>
 										<Text size="xSmall" className="text-gray">
-											<FinalPrice>{product}</FinalPrice>
+											<FinalPrice>{product.fields}</FinalPrice>
 										</Text>
 									</Box>
 								</div>
@@ -62,9 +66,10 @@ const SearchResultFallback: FC = () => {
 };
 
 export const SearchResult: FC = () => {
+	const { resultProduct, loading } = useSelectSearch();
 	return (
-		<Suspense fallback={<SearchResultFallback />}>
-			<SearchResultContent />
-		</Suspense>
+		<React.Fragment>
+			{loading ? <SearchResultFallback /> : <SearchResultContent products={resultProduct} />}
+		</React.Fragment>
 	);
 };
