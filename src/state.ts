@@ -1,13 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
-import breadIcon from "static/category-bread.svg";
-import coffeeIcon from "static/category-coffee.svg";
-import drinksIcon from "static/category-drinks.svg";
-import foodIcon from "static/category-food.svg";
-import juiceIcon from "static/category-juice.svg";
-import matchaIcon from "static/category-matcha.svg";
-import milkteaIcon from "static/category-milktea.svg";
 import { Cart } from "types/cart";
-import { Category, CategoryId } from "types/category";
+import { CategoryId } from "types/category";
 import { Store } from "types/delivery";
 import { Product, Variant } from "types/product";
 import { wait } from "utils/async";
@@ -18,19 +11,6 @@ import { getLocation, getPhoneNumber, getUserInfo } from "zmp-sdk";
 export const userState = selector({
 	key: "user",
 	get: () => getUserInfo({}).then((res) => res.userInfo)
-});
-
-export const categoriesState = selector<Category[]>({
-	key: "categories",
-	get: () => [
-		{ id: "coffee", name: "Cà phê", icon: coffeeIcon },
-		{ id: "matcha", name: "Trà xanh", icon: matchaIcon },
-		{ id: "food", name: "Đồ ăn vặt", icon: foodIcon },
-		{ id: "milktea", name: "Trà sữa", icon: milkteaIcon },
-		{ id: "drinks", name: "Giải khát", icon: drinksIcon },
-		{ id: "bread", name: "Bánh mỳ", icon: breadIcon },
-		{ id: "juice", name: "Nước ép", icon: juiceIcon }
-	]
 });
 
 const description =

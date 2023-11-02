@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import { Box, Page } from "zmp-ui";
 
 import { Banner } from "./banner";
-import { Categories } from "./categories";
+import { CategoriesDev } from "./categories";
 import { Inquiry } from "./inquiry";
 import { ProductList } from "./product-list";
 import { Recommend } from "./recommend";
@@ -17,7 +17,7 @@ const HomePage: React.FunctionComponent = () => {
 				<Inquiry />
 				<Banner />
 				<Suspense>
-					<Categories />
+					<CategoriesDev />
 				</Suspense>
 				<Divider />
 				<Recommend />
