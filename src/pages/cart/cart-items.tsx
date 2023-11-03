@@ -9,13 +9,12 @@ import { CartItem } from "types/cart";
 import { saveToLocalStorage } from "utils/local-storage";
 import { Box, Text } from "zmp-ui";
 
-
 export const CartItems: FC = () => {
 	const cart = useSelectorCart();
 	const productListInCart = cart.cart;
 	const [editingItem, setEditingItem] = useState<CartItem | undefined>();
 
-    useEffect(() => {
+	useEffect(() => {
 		saveToLocalStorage(KEY_LOCAL_STORAGE.KEY_CART, JSON.stringify(productListInCart));
 	}, [productListInCart]);
 
