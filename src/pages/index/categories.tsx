@@ -27,27 +27,27 @@ export const CategoriesDev: FC = () => {
 		setSelectedCategoryId(categoryId);
 		navigate("/category");
 	};
+	const checkLengthCategory = Array.isArray(categories) && categories.length > 0 ? categories.length : 6;
 
 	return (
-		<Box className="bg-white grid grid-cols-4 gap-4 p-4">
+		<div className="grid grid-cols-4 items-center">
 			{isLoading ? (
-				<CategoryItemSkeleton />
+				<div style={{ width: "100%", gridColumn: "span 4" }}>
+					<CategoryItemSkeleton numImages={Number(checkLengthCategory)} />
+				</div>
 			) : (
-				categories &&
+				Array.isArray(categories) &&
 				categories.map((category, i) => (
-					// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-					<div
-						key={i}
-						onClick={() => gotoCategory(category.fields.id)}
-						className="flex flex-col space-y-2 items-center"
-					>
-						<img className="w-12 h-12" src={category.fields.icon} />
-						<Text size="xxSmall" className="text-gray">
-							{category.fields.name}
-						</Text>
+					<div key={i} onClick={() => gotoCategory(category.fields.id)} className="w-full">
+						<div className="flex flex-col space-x-2 items-center rounded-full">
+							<img className="w-12 h-12 rounded-full" src={category.fields.icon} />
+							<Text size="xxSmall" className="text-gray">
+								{category.fields.name}
+							</Text>
+						</div>
 					</div>
 				))
 			)}
-		</Box>
+		</div>
 	);
 };

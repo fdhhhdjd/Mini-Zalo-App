@@ -1,3 +1,4 @@
+import { CategoriesDev } from "pages/index/categories";
 import React, { FC, HTMLProps, PropsWithChildren } from "react";
 import { Box, Text } from "zmp-ui";
 import { BodyTextProps } from "zmp-ui/text";
@@ -61,10 +62,15 @@ export const ProductSearchResultSkeleton: FC = () => {
 	);
 };
 
-export const CategoryItemSkeleton: FC = () => {
+export const CategoryItemSkeleton: FC<{ numImages: number }> = ({ numImages }) => {
 	return (
-		<div className="space-y-2">
-			<ImageSkeleton className="w-full rounded-lg aspect-[2/1] bg-cover bg-center bg-skeleton" />
+		<div className="gap-4 grid grid-cols-4 p-4">
+			{Array.from({ length: numImages }).map((_, i) => (
+				<div key={i} className="flex flex-row space-x-2 items-center rounded-full">
+					<ImageSkeleton className="w-12 h-12 rounded-full" />
+					<div className="h-3 w-16 bg-skeleton"></div>
+				</div>
+			))}
 		</div>
 	);
 };
