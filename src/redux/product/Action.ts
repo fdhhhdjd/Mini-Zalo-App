@@ -36,7 +36,7 @@ export const getProductInitiate = (): any => {
 			const response: ResponseProductData = await HttpClient.getMethod(
 				`${process.env.API_SERVER}/${BASE_ID}/${TABLE.PRODUCT}`
 			); //API_SERVER
-			dispatch(getDataProductSuccess(response.data.records));
+		    dispatch(getDataProductSuccess(response.data.records));
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				dispatch(getDataProductError(error));

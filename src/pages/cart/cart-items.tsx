@@ -6,25 +6,26 @@ import { ProductPicker } from "components/product/picker";
 import useSelectorCart from "hooks/useSelectorCart";
 import React, { FC, useEffect, useState } from "react";
 import { CartItem } from "types/cart";
+import { saveToLocalStorage } from "utils/local-storage";
 import { Box, Text } from "zmp-ui";
 
 
 export const CartItems: FC = () => {
 	const cart = useSelectorCart();
-	const cartData = cart.cart;
+	const productListInCart = cart.cart;
 	const [editingItem, setEditingItem] = useState<CartItem | undefined>();
 
     useEffect(() => {
-		localStorage.setItem(KEY_LOCAL_STORAGE.KEY_CART, JSON.stringify(cartData));
-	}, [cartData]);
+		saveToLocalStorage(KEY_LOCAL_STORAGE.KEY_CART, JSON.stringify(productListInCart));
+	}, [productListInCart]);
 
 	return (
 		<Box className="py-3 px-4">
-			{cartData.length > 0 ? (
+			{productListInCart.length > 0 ? (
 				<ProductPicker product={editingItem?.product} selected={editingItem}>
 					{({ open }) => (
 						<ListRenderer
-							items={cartData}
+							items={productListInCart}
 							limit={3}
 							onClick={(item) => {
 								setEditingItem(item);

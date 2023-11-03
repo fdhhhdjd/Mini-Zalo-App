@@ -1,11 +1,10 @@
 import { atom, selector, selectorFamily } from "recoil";
-import { Cart } from "types/cart";
 import { CategoryId } from "types/category";
 import { Store } from "types/delivery";
 import { Product, Variant } from "types/product";
 import { wait } from "utils/async";
 import { calculateDistance } from "utils/location";
-import { calcFinalPrice, getDummyImage } from "utils/product";
+import { getDummyImage } from "utils/product";
 import { getLocation, getPhoneNumber, getUserInfo } from "zmp-sdk";
 
 export const userState = selector({
@@ -221,26 +220,26 @@ export const productsByCategoryState = selectorFamily<Product[], CategoryId>({
 		}
 });
 
-export const cartState = atom<Cart>({
-	key: "cart",
-	default: []
-});
+// export const cartState = atom<Cart>({
+// 	key: "cart",
+// 	default: []
+// });
 
-export const totalQuantityState = selector({
-	key: "totalQuantity",
-	get: ({ get }) => {
-		const cart = get(cartState);
-		return cart.reduce((total, item) => total + item.quantity, 0);
-	}
-});
+// export const totalQuantityState = selector({
+// 	key: "totalQuantity",
+// 	get: ({ get }) => {
+// 		const cart = get(cartState);
+// 		return cart.reduce((total, item) => total + item.quantity, 0);
+// 	}
+// });
 
-export const totalPriceState = selector({
-	key: "totalPrice",
-	get: ({ get }) => {
-		const cart = get(cartState);
-		return cart.reduce((total, item) => total + item.quantity * calcFinalPrice(item.product, item.options), 0);
-	}
-});
+// export const totalPriceState = selector({
+// 	key: "totalPrice",
+// 	get: ({ get }) => {
+// 		const cart = get(cartState);
+// 		return cart.reduce((total, item) => total + item.quantity * calcFinalPrice(item.product, item.options), 0);
+// 	}
+// });
 
 export const keywordState = atom({
 	key: "keyword",
