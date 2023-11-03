@@ -18,10 +18,10 @@ export const CategoryPicker: FC = () => {
 	return (
 		<Tabs scrollable defaultActiveKey={selectedCategory} className="category-tabs">
 			{categories &&
-				categories.map((category, id) => (
+				categories?.map((category, id) => (
 					<Tabs.Tab key={id} label={category.fields.name}>
 						<Suspense>
-							<CategoryProducts CategoryId={category.id} />
+							<CategoryProducts categoryId={category.id} />
 						</Suspense>
 					</Tabs.Tab>
 				))}
@@ -29,8 +29,8 @@ export const CategoryPicker: FC = () => {
 	);
 };
 
-const CategoryProducts: FC<{ CategoryId: string }> = ({ CategoryId }) => {
-	const productsByCategory = useRecoilValue(productsByCategoryState(CategoryId));
+const CategoryProducts: FC<{ categoryId: string }> = ({ categoryId }: { categoryId: string }) => {
+	const productsByCategory = useRecoilValue(productsByCategoryState(categoryId));
 	if (productsByCategory.length === 0) {
 		return (
 			<Box className="flex-1 bg-background p-4 flex justify-center items-center">

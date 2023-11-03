@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { useSetRecoilState } from "recoil";
 import { getCategoriesInitiate } from "redux/category/Actions";
 import { selectedCategoryIdState } from "state";
-import { Box, Text } from "zmp-ui";
+import { Text } from "zmp-ui";
 
 export const CategoriesDev: FC = () => {
 	const dispatch = useDispatch();
@@ -32,16 +32,15 @@ export const CategoriesDev: FC = () => {
 	return (
 		<div className="grid grid-cols-4 items-center">
 			{isLoading ? (
-				<div style={{ width: "100%", gridColumn: "span 4" }}>
-					<CategoryItemSkeleton numImages={Number(checkLengthCategory)} />
-				</div>
+				<CategoryItemSkeleton numImages={Number(checkLengthCategory)} />
 			) : (
 				Array.isArray(categories) &&
 				categories.map((category, i) => (
-					<div key={i} onClick={() => gotoCategory(category.fields.id)} className="w-full">
+					// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+					<div key={i} onClick={() => gotoCategory(category?.fields?.id)} className="w-full">
 						<div className="flex flex-col space-x-2 items-center rounded-full">
 							<img className="w-12 h-12 rounded-full" src={category.fields.icon} />
-							<Text size="xxSmall" className="text-gray">
+							<Text size="xxSmall" className="text-gray mt-1 mb-1">
 								{category.fields.name}
 							</Text>
 						</div>

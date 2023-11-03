@@ -40,7 +40,16 @@ module.exports = {
 		"no-undef": "off",
 		"no-unused-vars": "off",
 		"no-case-declarations": "off",
-		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				varsIgnorePattern: "^_",
+				argsIgnorePattern: "^_",
+				vars: "all",
+				args: "after-used",
+				ignoreRestSiblings: false
+			}
+		],
 		"no-mixed-spaces-and-tabs": "off",
 		"react-native/no-inline-styles": "off",
 		"@typescript-eslint/naming-convention": [

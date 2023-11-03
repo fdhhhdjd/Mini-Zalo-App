@@ -10,10 +10,7 @@ const initialState = {
 	error: null
 } as InitialInterface;
 
-const CategoriesReducer = (
-	state: InitialInterface = initialState,
-	action: CategoriesAction<undefined | string[] | Error>
-) => {
+const CategoriesReducer = (state: InitialInterface = initialState, action: CategoriesAction<string[]>) => {
 	const { type, payload } = action;
 	switch (type) {
 		// Todo:  1. Pending
