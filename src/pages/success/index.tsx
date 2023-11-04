@@ -1,13 +1,15 @@
 import React, { FC } from "react";
-import success from "static/success.png";
+import { useNavigate } from "react-router";
+import success from "static/success.gif";
 import thanksAnimation from "static/thanks.gif";
-import { Box, Header, Page, Text } from "zmp-ui";
+import { Box, Header, Page, Text, Button } from "zmp-ui";
 
 const SuccessPage: FC = () => {
+	const navigate = useNavigate();
 	return (
 		<>
 			<Header />
-			<Page>
+			<Page className="flex flex-col justify-center h-[90vh]">
 				<Box
 					flexDirection="column"
 					flex
@@ -22,9 +24,12 @@ const SuccessPage: FC = () => {
 					<div className="flex flex-col items-center space-y-2">
 						<img src={thanksAnimation} alt="" className="w-80 h-50 mx-auto mb-4" />
 					</div>
-					<img src={success} className="w-40 h-40" alt="success" />
-					<Text className="font-bold text-6xl mb-2">Thank you!</Text>
-					<Text className="text-1xl mb-6 mt-10">Order was success</Text>
+					<img src={success} className="w-40 h-40 object-cover" alt="success" />
+					<Text className="font-bold text-3xl text-slate-700 mb-2">Thank you!</Text>
+					<Text className="text-1xl mb-6 mt-10 text-slate-500">Order was success</Text>
+					<Button size="medium" className="mt-4" onClick={() => navigate("/")}>
+						Back to Home
+					</Button>
 				</Box>
 			</Page>
 		</>
