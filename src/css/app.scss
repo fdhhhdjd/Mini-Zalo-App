@@ -790,3 +790,17 @@ body {
 		margin-left: 80%;
 	}
 }
+/* Transition
+ -----------------------------*/
+@keyframes slideIn {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.page-enter-active {
+	animation: slideIn 0.5s ease-in-out;
+}

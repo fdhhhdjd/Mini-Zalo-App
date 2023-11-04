@@ -5,6 +5,11 @@ import thanksAnimation from "static/thanks.gif";
 import { Box, Header, Page, Text, Button } from "zmp-ui";
 
 const SuccessPage: FC = () => {
+	const [isAnimated, setIsAnimated] = React.useState(false);
+	React.useLayoutEffect(() => {
+		setIsAnimated(true);
+		return () => setIsAnimated(false);
+	}, []);
 	const navigate = useNavigate();
 	return (
 		<>
@@ -15,7 +20,9 @@ const SuccessPage: FC = () => {
 					flex
 					alignItems="center"
 					justifyContent="center"
-					className="bg-background h-full space-y-5"
+					className={`bg-background h-full space-y-5 ${
+						isAnimated ? "page-enter-active" : "" // Add the "page-enter-active" class when isAnimated is true
+					}`}
 				>
 					<div className="pyro">
 						<div className="before"></div>
