@@ -38,7 +38,7 @@ export const TimePicker: FC = () => {
 		time.setSeconds(0);
 		time.setMilliseconds(0);
 		const endTime = new Date();
-		endTime.setHours(21);
+		endTime.setHours(24);
 		endTime.setMinutes(0);
 		endTime.setSeconds(0);
 		endTime.setMilliseconds(0);
