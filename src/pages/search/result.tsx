@@ -3,15 +3,13 @@
 import { FinalPrice } from "components/display/final-price";
 import { ProductPicker } from "components/product/picker";
 import { ProductSearchResultSkeleton } from "components/skeletons";
-import useSearchProducts, { useSelectSearch } from "hooks/useSearchProducts";
+import { useSelectSearch } from "hooks/useSearchProducts";
 import { isArray } from "lodash";
-import React, { FC, Suspense } from "react";
-import { useRecoilValue } from "recoil";
-import { resultState } from "state";
-import { Box, Text } from "zmp-ui";
+import React, { FC } from "react";
 import { ProductItem } from "types/product";
+import { Box, Text } from "zmp-ui";
 
-const SearchResultContent: FC<{ products: ProductItem[] | [] }> = ({ products }) => {
+const SearchResultContent: FC<{ products: Error | string[] | ProductItem[] | undefined }> = ({ products }) => {
 	// const result = useRecoilValue(resultState);
 
 	return (
@@ -66,6 +64,7 @@ const SearchResultFallback: FC = () => {
 };
 
 export const SearchResult: FC = () => {
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	const { resultProduct, loading } = useSelectSearch();
 	return (
 		<React.Fragment>

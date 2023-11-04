@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
-import { Box, Input } from "zmp-ui";
 import useSearchProducts from "hooks/useSearchProducts";
+import React, { FC, useCallback } from "react";
+import { Box, Input } from "zmp-ui";
 export const Inquiry: FC = () => {
 	const { debouncedSearch, keySearch } = useSearchProducts();
 	const handleChange = useCallback(

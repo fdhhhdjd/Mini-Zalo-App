@@ -1,5 +1,6 @@
-import { CategoryId } from "./category";
 import { TYPES } from "redux/search/Types";
+
+import { CategoryId } from "./category";
 
 export type ResponseProductData = {
 	data: {

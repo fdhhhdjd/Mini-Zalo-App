@@ -1,7 +1,5 @@
 //* IMPORT
-import { BASE_ID, TABLE } from "common/constants";
-import { HttpClient } from "services";
-import { ProductItem, ResponseProductData } from "types/search";
+import { ProductItem } from "types/search";
 
 import { TYPES } from "./Types";
 
