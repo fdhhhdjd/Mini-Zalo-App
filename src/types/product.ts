@@ -60,11 +60,7 @@ export interface ProductItems {
 	id: number | string;
 	fields: ProductField;
 }
-export interface ProductField {
-	image: string;
-	name: string;
-	price: number;
-}
+
 export interface InitialProdInterface {
 	isLoading: boolean;
 	products: ProductItems[];
@@ -89,7 +85,7 @@ export interface ProductField {
 	banner: string[];
 }
 export interface ProductItem {
-	id: string;
+	id: string | number;
 	fields: ProductField;
 }
 

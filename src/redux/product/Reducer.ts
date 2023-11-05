@@ -30,6 +30,7 @@ const ProductReducer = (state: InitialProdInterface = initialState, action: Prod
 						...product,
 						fields: {
 							...product.fields,
+							id: product.id,
 							variants: parsedVariants,
 							sale: {
 								type: getStatusType(product.fields.type_sale[0]),
@@ -42,6 +43,7 @@ const ProductReducer = (state: InitialProdInterface = initialState, action: Prod
 					...product,
 					fields: {
 						...product.fields,
+						id: product.id,
 						variants: parsedVariants
 					}
 				};

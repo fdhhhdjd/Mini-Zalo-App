@@ -55,11 +55,6 @@ export interface Product {
 	variants?: Variant[];
 }
 
-export interface ProductField {
-	image: string;
-	name: string;
-	price: number;
-}
 export interface InitialInterface {
 	loading: boolean;
 	resultProduct: ProductItem[];

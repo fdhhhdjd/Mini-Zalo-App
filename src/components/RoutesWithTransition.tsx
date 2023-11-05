@@ -12,19 +12,23 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 const RoutesWithTransition: React.FC = () => {
 	const location = useLocation();
 	return (
-		<TransitionGroup>
-			<CSSTransition key={location.pathname} classNames="page" timeout={{ enter: 400, exit: 200 }}>
-				<Routes location={location}>
-					<Route path="/" element={<HomePage />}></Route>
-					<Route path="/search" element={<SearchPage />}></Route>
-					<Route path="/category" element={<CategoryPage />}></Route>
-					<Route path="/notification" element={<NotificationPage />}></Route>
-					<Route path="/cart" element={<CartPage />}></Route>
-					<Route path="/profile" element={<ProfilePage />}></Route>
-					<Route path="/success" element={<SuccessPage />}></Route>
-				</Routes>
-			</CSSTransition>
-		</TransitionGroup>
+		<>
+			<TransitionGroup>
+				<CSSTransition key={location.pathname} classNames="page" timeout={{ enter: 400, exit: 200 }}>
+					<Routes>
+						<Route path="/category" element={<CategoryPage />}></Route>
+						<Route path="/notification" element={<NotificationPage />}></Route>
+						<Route path="/cart" element={<CartPage />}></Route>
+						<Route path="/profile" element={<ProfilePage />}></Route>
+						<Route path="/success" element={<SuccessPage />}></Route>
+					</Routes>
+				</CSSTransition>
+			</TransitionGroup>
+			<Routes>
+				<Route path="/" element={<HomePage />}></Route>
+				<Route path="/search" element={<SearchPage />}></Route>
+			</Routes>
+		</>
 	);
 };
 
