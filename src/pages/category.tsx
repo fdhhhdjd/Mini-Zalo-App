@@ -1,15 +1,18 @@
 import { ProductItem } from "components/product/item";
+import useGetProducts from "hooks/useGetProductCategory";
 import useStoreCategories from "hooks/useSelectorCategories";
 import React, { FC, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useRecoilValue } from "recoil";
 import { getCategoriesInitiate } from "redux/category/Actions";
-import { productsByCategoryState, selectedCategoryIdState } from "state";
+import { selectedCategoryIdState } from "state";
+import { CategoriesItem } from "types/category";
 import { Box, Header, Page, Tabs, Text } from "zmp-ui";
 
 export const CategoryPicker: FC = () => {
 	const dispatch = useDispatch();
 	const { categories } = useStoreCategories();
+
 	useEffect(() => {
 		dispatch(getCategoriesInitiate());
 	}, []);
@@ -28,10 +31,14 @@ export const CategoryPicker: FC = () => {
 		</Tabs>
 	);
 };
-
 const CategoryProducts: FC<{ categoryId: string }> = ({ categoryId }: { categoryId: string }) => {
-	const productsByCategory = useRecoilValue(productsByCategoryState(categoryId));
-	if (productsByCategory.length === 0) {
+	const { allProducts } = useGetProducts();
+
+	const filteredProducts = allProducts.filter((product: CategoriesItem) => {
+		return product.fields.category_id.includes(categoryId);
+	});
+
+	if (!filteredProducts) {
 		return (
 			<Box className="flex-1 bg-background p-4 flex justify-center items-center">
 				<Text size="xSmall" className="text-gray">
@@ -42,7 +49,7 @@ const CategoryProducts: FC<{ categoryId: string }> = ({ categoryId }: { category
 	}
 	return (
 		<Box className="bg-background grid grid-cols-2 gap-4 p-4">
-			{productsByCategory.map((product) => (
+			{filteredProducts.map((product: CategoriesItem) => (
 				<ProductItem key={product.id} product={product} />
 			))}
 		</Box>

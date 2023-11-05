@@ -27,10 +27,17 @@ export interface CategoriesFields {
 	name: string;
 	product: Product[];
 	icon: string;
+	category_id: string;
 }
 export interface Product {
 	title: string;
+	id: string;
 }
+export interface ResponseProduct {
+	createdTime: string;
+	fields: Product[];
+}
+
 export interface InitialInterface {
 	isLoading: boolean;
 	categories: CategoriesItem[];
