@@ -38,7 +38,7 @@ export const getNotifyInitiate = (): any => {
 				`${process.env.API_SERVER}/${BASE_ID}/${TABLE.NOTIFY}`
 			);
 
-			dispatch(getDataNotifySuccess(response.data.records));
+			dispatch(getDataNotifySuccess(response?.data?.records));
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				dispatch(getDataNotifyError(error));

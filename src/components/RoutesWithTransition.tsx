@@ -16,17 +16,17 @@ const RoutesWithTransition: React.FC = () => {
 			<TransitionGroup>
 				<CSSTransition key={location.pathname} classNames="page" timeout={{ enter: 400, exit: 200 }}>
 					<Routes>
-						<Route path="/category" element={<CategoryPage />}></Route>
-						<Route path="/notification" element={<NotificationPage />}></Route>
-						<Route path="/cart" element={<CartPage />}></Route>
-						<Route path="/profile" element={<ProfilePage />}></Route>
-						<Route path="/success" element={<SuccessPage />}></Route>
+						<Route path="/category" element={<CategoryPage />} />
+						<Route path="/notification" element={<NotificationPage />} />
+						<Route path="/cart" element={<CartPage />} />
+						<Route path="/profile" element={<ProfilePage />} />
+						<Route path="/success" element={<SuccessPage />} />
 					</Routes>
 				</CSSTransition>
 			</TransitionGroup>
 			<Routes>
-				<Route path="/" element={<HomePage />}></Route>
-				<Route path="/search" element={<SearchPage />}></Route>
+				<Route path="/" element={<HomePage />} />
+				<Route path="/search" element={<SearchPage />} />
 			</Routes>
 		</>
 	);
