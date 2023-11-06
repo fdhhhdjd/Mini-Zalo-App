@@ -7,7 +7,7 @@ import { createOrder } from "zmp-sdk";
 import { getConfig } from "./config";
 
 export function calcFinalPrice(product: ProductField, options?: SelectedOptions) {
-	let finalPrice = product.price;
+	let finalPrice = product?.price;
 
 	if (product?.amount_price_sale) {
 		if (product.type_sale[0] === "10") {
@@ -16,7 +16,7 @@ export function calcFinalPrice(product: ProductField, options?: SelectedOptions)
 			finalPrice = product.price * (1 - product.amount_price_sale[0]);
 		}
 	}
-	if (options && product.variants) {
+	if (options && product?.variants) {
 		const selectedOptions: Option[] = [];
 		for (const variantKey in options) {
 			const parserProduct = product.variants;

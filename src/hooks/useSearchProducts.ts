@@ -24,7 +24,7 @@ const useSearchProducts = () => {
 				return nameProduct.includes(keySearch.toLocaleLowerCase());
 			}) as ProductItem[];
 		} else {
-			return [];
+			return [] as ProductItem[];
 		}
 	}, [keySearch, products, isMounted]);
 

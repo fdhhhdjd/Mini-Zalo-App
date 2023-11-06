@@ -19,8 +19,8 @@ const SearchResultContent: FC<{ products: Error | string[] | ProductItem[] | und
 			</Text.Title>
 			{isArray(products) && products.length > 0 ? (
 				<Box className="p-4 pt-0 space-y-4 flex-1 overflow-y-auto">
-					{products.map((product) => (
-						<ProductPicker key={product.id} product={product.fields}>
+					{products?.map((product) => (
+						<ProductPicker key={product.id} product={product}>
 							{({ open }) => (
 								// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
 								<div onClick={open} className="flex items-center space-x-4">
@@ -66,6 +66,7 @@ const SearchResultFallback: FC = () => {
 export const SearchResult: FC = () => {
 	// eslint-disable-next-line @typescript-eslint/naming-convention
 	const { resultProduct, loading } = useSelectSearch();
+
 	return (
 		<React.Fragment>
 			{loading ? <SearchResultFallback /> : <SearchResultContent products={resultProduct} />}

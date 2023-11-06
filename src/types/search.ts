@@ -22,7 +22,7 @@ export type Sale = PercentSale | FixedSale;
 
 export interface Option {
 	key: string;
-	label?: string;
+	label: string;
 	priceChange?: Sale;
 }
 
@@ -61,16 +61,39 @@ export interface InitialInterface {
 	error: Error | null;
 }
 
+export interface Option {
+	key: string;
+	label: string;
+	priceChange?: {
+		type: string;
+		percent?: number;
+		amount?: number;
+	};
+}
+
+export type ProductVariants = {
+	key: string;
+	label: string;
+	type: string;
+	default?: string | string[];
+	options?: Option[];
+};
+
 export interface ProductField {
-	name: string;
-	category_id: string[];
-	sold: number;
 	image: string;
-	description: string;
-	sale_id: string[];
+	name: string;
+	sold: number;
 	price: number;
+	category_id: string[];
+	sale_id: string[];
+	description: string;
 	code: number;
-	banner: string[];
+	variants: ProductVariants[];
+	icon_category: string[];
+	name_category: string[];
+	status_sale: string[];
+	amount_price_sale: number[];
+	type_sale: string[];
 }
 export interface ProductItem {
 	id: string;
