@@ -11,7 +11,7 @@ const initCartState: InitialDefaultCart = {
 	cart: cartLocal,
 	totalQuantity: cartLocal.reduce((total: number, item: CartItem) => total + item.quantity, 0),
 	totalPrice: cartLocal.reduce(
-		(total: number, item: CartItem) => total + item.quantity * calcFinalPrice(item.product, item.options),
+		(total: number, item: CartItem) => total + item.quantity * (calcFinalPrice(item.product.fields, item.options) ?? 0),
 		0
 	)
 };
@@ -22,7 +22,7 @@ const CartReducer = (state: InitialDefaultCart = initCartState, action: CartActi
 		case TYPES.GET_CART_SUCCESS:
 			const totalQuantity = payload.reduce((total, item) => total + item.quantity, 0);
 			const totalPrice = payload.reduce(
-				(total, item) => total + item.quantity * calcFinalPrice(item.product, item.options),
+				(total, item) => total + item.quantity * (calcFinalPrice(item.product.fields, item.options) ?? 0),
 				0
 			);
 			saveToLocalStorage(KEY_LOCAL_STORAGE.KEY_CART, JSON.stringify(payload));
