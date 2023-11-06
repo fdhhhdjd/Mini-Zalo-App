@@ -1,6 +1,6 @@
 //* IMPORT
 import { TYPE_SALE_STRING } from "common/constants";
-import { InitialProdInterface, ProductAction } from "types/product";
+import { InitialProdInterface, ProductAction, ProductItems } from "types/product";
 import { parseData } from "utils/convert";
 import { getStatusType } from "utils/product";
 
@@ -21,8 +21,9 @@ const ProductReducer = (state: InitialProdInterface = initialState, action: Prod
 				isLoading: true
 			};
 		case TYPES.GET_PRODUCT_SUCCESS:
-			const productsWithParsedVariants = payload?.map((product) => {
-				const parsedVariants = parseData(product.fields.variants);
+			const productsWithParsedVariants: ProductItems[] = payload?.map((product: ProductItems) => {
+				const variants = product.fields?.variants as unknown as string;
+				const parsedVariants = parseData(variants);
 				if (product.fields.type_sale) {
 					const typeSale = getStatusType(product.fields.type_sale[0]);
 					const typeSaleKey = typeSale === TYPE_SALE_STRING.FIXED ? "amount" : typeSale;

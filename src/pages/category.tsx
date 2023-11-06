@@ -11,7 +11,7 @@ import { Box, Header, Page, Tabs, Text } from "zmp-ui";
 
 export const CategoryPicker: FC = () => {
 	const dispatch = useDispatch();
-	const { categories } = useStoreCategories();
+	const { categories } = useStoreCategories() as { categories: CategoriesItem[] };
 
 	useEffect(() => {
 		dispatch(getCategoriesInitiate());
@@ -20,21 +20,20 @@ export const CategoryPicker: FC = () => {
 	const selectedCategory = useRecoilValue(selectedCategoryIdState);
 	return (
 		<Tabs scrollable defaultActiveKey={selectedCategory} className="category-tabs">
-			{categories &&
-				categories?.map((category, id) => (
-					<Tabs.Tab key={id} label={category.fields.name}>
-						<Suspense>
-							<CategoryProducts categoryId={category.id} />
-						</Suspense>
-					</Tabs.Tab>
-				))}
+			{categories?.map((item, index: number) => (
+				<Tabs.Tab key={index} label={item.fields.name}>
+					<Suspense>
+						<CategoryProducts categoryId={item.id} />
+					</Suspense>
+				</Tabs.Tab>
+			))}
 		</Tabs>
 	);
 };
 const CategoryProducts: FC<{ categoryId: string }> = ({ categoryId }: { categoryId: string }) => {
 	const { allProducts } = useGetProducts();
 
-	const filteredProducts = allProducts.filter((product: CategoriesItem) => {
+	const filteredProducts = allProducts.filter((product) => {
 		return product.fields.category_id.includes(categoryId);
 	});
 
@@ -49,7 +48,7 @@ const CategoryProducts: FC<{ categoryId: string }> = ({ categoryId }: { category
 	}
 	return (
 		<Box className="bg-background grid grid-cols-2 gap-4 p-4">
-			{filteredProducts.map((product: CategoriesItem) => (
+			{filteredProducts.map((product) => (
 				<ProductItem key={product.id} product={product} />
 			))}
 		</Box>

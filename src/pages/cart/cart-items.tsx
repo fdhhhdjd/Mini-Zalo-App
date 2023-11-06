@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { getCartSuccessAction } from "redux/cart/Actions";
 import { CartItem } from "types/cart";
 import { saveToLocalStorage } from "utils/local-storage";
-import { Box, Text, Button, Icon } from "zmp-ui";
+import { Box, Button, Icon, Text } from "zmp-ui";
 
 export const CartItems: FC = () => {
 	const cart = useSelectorCart();
@@ -46,18 +46,18 @@ export const CartItems: FC = () => {
 								}
 								renderLeft={(item) => (
 									// eslint-disable-next-line jsx-a11y/alt-text
-									<img className="w-10 h-10 rounded-lg" src={item.product.image} />
+									<img className="w-10 h-10 rounded-lg" src={item.product.fields.image} />
 								)}
 								renderRight={(item) => (
 									<Box flex className="space-x-1">
 										<Box className="space-y-1 flex-1">
-											<Text size="small">{item.product.name}</Text>
+											<Text size="small">{item.product.fields.name}</Text>
 											<Text className="text-gray" size="xSmall">
-												<FinalPrice options={item.options}>{item.product}</FinalPrice>
+												<FinalPrice options={item.options}>{item.product.fields}</FinalPrice>
 											</Text>
 											<Text className="text-gray" size="xxxSmall">
 												<DisplaySelectedOptions options={item.options}>
-													{item.product}
+													{item.product.fields}
 												</DisplaySelectedOptions>
 											</Text>
 										</Box>

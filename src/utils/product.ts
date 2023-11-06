@@ -1,21 +1,21 @@
 import { TYPE_SALE_NUMBER, TYPE_SALE_STRING } from "common/constants";
 import _ from "lodash";
 import { SelectedOptions } from "types/cart";
-import { Option, Product } from "types/product";
+import { Option, ProductField, ProductItems } from "types/product";
 import { createOrder } from "zmp-sdk";
 
 import { getConfig } from "./config";
 
-export function calcFinalPrice(product: Product, options?: SelectedOptions) {
+export function calcFinalPrice(product: ProductField, options?: SelectedOptions) {
 	let finalPrice = product.price;
-	if (product.sale) {
-		if (product.sale.type === "fixed") {
-			finalPrice = product.price - product.sale.amount;
+
+	if (product?.amount_price_sale) {
+		if (product.type_sale[0] === "10") {
+			finalPrice = product.price - product.amount_price_sale[0];
 		} else {
-			finalPrice = product.price * (1 - product.sale.percent);
+			finalPrice = product.price * (1 - product.amount_price_sale[0]);
 		}
 	}
-
 	if (options && product.variants) {
 		const selectedOptions: Option[] = [];
 		for (const variantKey in options) {
@@ -24,22 +24,25 @@ export function calcFinalPrice(product: Product, options?: SelectedOptions) {
 			if (variant) {
 				const currentOption = options[variantKey];
 				if (typeof currentOption === "string") {
-					const selected = variant.options.find((o) => o.key === currentOption);
+					const selected = variant.options?.find((o) => o.key === currentOption);
 					if (selected) {
 						selectedOptions.push(selected);
 					}
 				} else {
-					const selecteds = variant.options.filter((o) => currentOption.includes(o.key));
+					const selecteds = variant.options?.filter((o) => currentOption.includes(o.key));
+					if (!selecteds) return;
 					selectedOptions.push(...selecteds);
 				}
 			}
 		}
 		finalPrice = selectedOptions.reduce((price, option) => {
 			if (option.priceChange) {
-				if (option.priceChange.type == "fixed") {
-					return price + option.priceChange.amount;
+				const amount = option?.priceChange?.amount ?? 0;
+				const percent = option?.priceChange?.percent ?? 0;
+				if (option.priceChange?.type === "fixed") {
+					return price + amount;
 				} else {
-					return price + product.price * option.priceChange.percent;
+					return price + product.price * percent;
 				}
 			}
 			return price;
@@ -89,8 +92,8 @@ export const getStatusType = (status: string) => {
 	}
 };
 
-export const recommendProductsState = (products) => {
-	return products.filter((p) => p.fields.sale);
+export const recommendProductsState = (products: ProductItems[]) => {
+	return products.filter((p) => p.fields);
 };
 
 const pay = (amount: number, description?: string) => {

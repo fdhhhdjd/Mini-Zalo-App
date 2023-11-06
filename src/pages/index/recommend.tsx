@@ -18,7 +18,7 @@ export const RecommendContent: FC = () => {
 			<Swiper slidesPerView={1.25} spaceBetween={16} className="px-4">
 				{recommendProducts.map((product) => (
 					<SwiperSlide key={product.id}>
-						<ProductPicker product={product.fields}>
+						<ProductPicker product={product}>
 							{({ open }) => (
 								// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
 								<div onClick={open} className="space-y-3">
@@ -26,25 +26,29 @@ export const RecommendContent: FC = () => {
 										className="relative aspect-video rounded-lg bg-cover bg-center bg-skeleton"
 										style={{ backgroundImage: `url(${product.fields.image})` }}
 									>
-										{product.fields.sale && (
+										{product.fields?.amount_price_sale && (
 											<Text
 												size="xxxxSmall"
 												className="absolute right-2 top-2 uppercase bg-green text-white h-4 px-[6px] rounded-full"
 											>
 												Giảm{" "}
-												{product.fields.sale.type === "percent" ? (
-													`${product.fields.sale.percent * 100}%`
+												{product.fields.type_sale[0] === "20" ? (
+													`${product.fields?.amount_price_sale[0] * 100}%`
 												) : (
-													<DisplayPrice>{product.fields.sale.amount}</DisplayPrice>
+													<DisplayPrice>{product.fields?.amount_price_sale[0]}</DisplayPrice>
 												)}
 											</Text>
 										)}
 									</Box>
-									<Box className="space-y-1">
+									<Box className="space-y-1 h-[70px] justify-between flex flex-col">
 										<Text size="small">{product.fields.name}</Text>
-										<Text size="xxSmall" className="line-through text-gray">
-											<DisplayPrice>{product.fields.price}</DisplayPrice>
-										</Text>
+										{product.fields?.amount_price_sale && (
+											<Text size="xxSmall" className="line-through text-gray">
+												<DisplayPrice>
+													{product.fields?.amount_price_sale && product.fields.price}
+												</DisplayPrice>
+											</Text>
+										)}
 										<Text size="large" className="font-medium text-primary">
 											<FinalPrice>{product.fields}</FinalPrice>
 										</Text>

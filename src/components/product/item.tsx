@@ -9,7 +9,7 @@ import { ProductPicker } from "./picker";
 
 export const ProductItem: FC<{ product: ProductItems }> = ({ product }) => {
 	return (
-		<ProductPicker product={product?.fields}>
+		<ProductPicker product={product}>
 			{({ open }) => (
 				// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
 				<div className="space-y-2" onClick={open}>

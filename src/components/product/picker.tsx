@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { getCartSuccessAction } from "redux/cart/Actions";
 import { SelectedOptions } from "types/cart";
-import { Product } from "types/product";
+import { ProductField, ProductItems } from "types/product";
 import { isIdentical } from "utils/product";
 import { Box, Button, Text } from "zmp-ui";
 
@@ -15,7 +15,7 @@ import { QuantityPicker } from "./quantity-picker";
 import { SingleOptionPicker } from "./single-option-picker";
 
 export interface ProductPickerProps {
-	product?: Product;
+	product?: ProductItems;
 	selected?: {
 		options: SelectedOptions;
 		quantity: number;
@@ -23,10 +23,10 @@ export interface ProductPickerProps {
 	children: (methods: { open: () => void; close: () => void }) => ReactNode;
 }
 
-function getDefaultOptions(product?: Product) {
+function getDefaultOptions(product?: ProductField) {
 	const parseProduct = product?.variants;
 	if (product && parseProduct) {
-		return parseProduct.reduce(
+		return parseProduct?.reduce(
 			(options, variant) =>
 				Object.assign(options, {
 					[variant.key]: variant.default
@@ -39,7 +39,9 @@ function getDefaultOptions(product?: Product) {
 
 export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selected }) => {
 	const [isVisible, setVisible] = useState(false);
-	const [options, setOptions] = useState<SelectedOptions>(selected ? selected.options : getDefaultOptions(product));
+	const [options, setOptions] = useState<SelectedOptions>(
+		selected ? selected.options : getDefaultOptions(product?.fields)
+	);
 	const [quantity, setQuantity] = useState(1);
 	const dispatch = useDispatch();
 	const cart = useSelectorCart();
@@ -54,7 +56,6 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 
 	const addToCart = () => {
 		if (product) {
-			// eslint-disable-next-line react-hooks/rules-of-hooks
 			let res = [...cartData];
 			if (selected) {
 				// updating an existing cart item, including quantity and size, or remove it if new quantity is 0
@@ -113,21 +114,21 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 					{product && (
 						<Box className="space-y-6 mt-2" p={4}>
 							<Box className="space-y-2">
-								<Text.Title>{product.name}</Text.Title>
+								<Text.Title>{product.fields?.name}</Text.Title>
 								<Text>
-									<FinalPrice options={options}>{product}</FinalPrice>
+									<FinalPrice options={options}>{product.fields}</FinalPrice>
 								</Text>
 								<Text>
 									<div
 										dangerouslySetInnerHTML={{
-											__html: product.description ?? ""
+											__html: product.fields?.description ?? ""
 										}}
 									></div>
 								</Text>
 							</Box>
 							<Box className="space-y-5">
-								{product.variants &&
-									product.variants?.map((variant) =>
+								{product.fields?.variants &&
+									product.fields?.variants?.map((variant) =>
 										variant.type === "single" ? (
 											<SingleOptionPicker
 												key={variant.key}
@@ -143,7 +144,7 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 										) : (
 											<MultipleOptionPicker
 												key={variant.key}
-												product={product}
+												product={product.fields}
 												variant={variant}
 												value={options[variant.key] as string[]}
 												onChange={(selectedOption) =>

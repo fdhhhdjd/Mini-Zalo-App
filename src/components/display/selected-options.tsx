@@ -1,9 +1,9 @@
 import React, { FC, useMemo } from "react";
 import { SelectedOptions } from "types/cart";
-import { Product } from "types/product";
+import { ProductField } from "types/product";
 
 export const DisplaySelectedOptions: FC<{
-	children: Product;
+	children: ProductField;
 	options: SelectedOptions;
 }> = ({ children, options }) => {
 	const description = useMemo(() => {
@@ -14,17 +14,17 @@ export const DisplaySelectedOptions: FC<{
 				.filter((v) => selectedVariants.includes(v.key))
 				.forEach((variant) => {
 					if (variant.type === "single") {
-						const selectedOption = variant.options.find((o) => o.key === options[variant.key]);
+						const selectedOption = variant.options?.find((o) => o.key === options[variant.key]);
 						if (selectedOption) {
 							variants.push(
 								`${variant.label || variant.key}: ${selectedOption.label || selectedOption.key}`
 							);
 						}
 					} else {
-						const selectedOptions = variant.options.filter((o) => options[variant.key].includes(o.key));
+						const selectedOptions = variant.options?.filter((o) => options[variant.key].includes(o.key));
 						variants.push(
 							`${variant.label || variant.key}: ${selectedOptions
-								.map((o) => o.label || o.key)
+								?.map((o) => o.label || o.key)
 								.join(", ")}`
 						);
 					}
