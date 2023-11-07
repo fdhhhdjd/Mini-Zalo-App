@@ -3,6 +3,7 @@ import { FinalPrice } from "components/display/final-price";
 import { DisplaySelectedOptions } from "components/display/selected-options";
 import { ListRenderer } from "components/list-renderer";
 import { ProductPicker } from "components/product/picker";
+import ToolTip from "components/tooltip";
 import useSelectorCart from "hooks/useSelectorCart";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -64,11 +65,13 @@ export const CartItems: FC = () => {
 										<Text className="text-primary font-medium" size="small">
 											x{item.quantity}
 										</Text>
-										<Button
-											onClick={() => removeItem(item)}
-											variant="tertiary"
-											icon={<Icon icon="zi-close-circle" />}
-										/>
+										<ToolTip tooltip="Xoá">
+											<Button
+												onClick={() => removeItem(item)}
+												variant="tertiary"
+												icon={<Icon icon="zi-close-circle" />}
+											/>
+										</ToolTip>
 									</Box>
 								)}
 							/>
