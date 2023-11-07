@@ -14,8 +14,9 @@ const RoutesWithTransition: React.FC = () => {
 	return (
 		<>
 			<TransitionGroup>
-				<CSSTransition key={location.pathname} classNames="page" timeout={{ enter: 400, exit: 200 }}>
+				<CSSTransition key={location.pathname} classNames="router" timeout={{ enter: 400, exit: 200 }}>
 					<Routes>
+						<Route path="/" element={<HomePage />} />
 						<Route path="/category" element={<CategoryPage />} />
 						<Route path="/notification" element={<NotificationPage />} />
 						<Route path="/cart" element={<CartPage />} />
@@ -25,7 +26,6 @@ const RoutesWithTransition: React.FC = () => {
 				</CSSTransition>
 			</TransitionGroup>
 			<Routes>
-				<Route path="/" element={<HomePage />} />
 				<Route path="/search" element={<SearchPage />} />
 			</Routes>
 		</>

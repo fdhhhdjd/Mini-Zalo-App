@@ -184,12 +184,12 @@ body {
 	}
 }
 
-.page-enter {
+.router-enter {
 	opacity: 0;
-	transform: translateX(-100%);
+	transform: translateX(100%);
 }
 
-.page-enter-active {
+.router-enter-active {
 	opacity: 1;
 	transform: translateX(0%);
 	transition:
@@ -197,14 +197,14 @@ body {
 		transform 300ms;
 }
 
-.page-exit {
+.router-exit {
 	opacity: 1;
 	transform: translateX(0%);
 }
 
-.page-exit-active {
+.router-exit-active {
 	opacity: 0;
-	transform: translateX(100%);
+	transform: translateX(-100%);
 	transition:
 		opacity 300ms,
 		transform 300ms;
