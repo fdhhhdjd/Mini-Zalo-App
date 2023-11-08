@@ -160,7 +160,7 @@ export const ProductPicker: FC<ProductPickerProps> = ({ children, product, selec
 								{selected ? (
 									<Button
 										variant={quantity > 0 ? "primary" : "secondary"}
-										type={quantity > 0 ? "highlight" : "neutral"}
+										type={quantity > 0 ? "highlight" : "danger"}
 										fullWidth
 										onClick={addToCart}
 									>
