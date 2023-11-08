@@ -1,4 +1,3 @@
-import ToolTip from "components/tooltip";
 import React, { FC } from "react";
 import { useNavigate } from "react-router";
 import success from "static/success.gif";
@@ -35,11 +34,9 @@ const SuccessPage: FC = () => {
 					<img src={success} className="w-40 h-40 object-cover" alt="success" />
 					<Text className="font-bold text-3xl text-slate-700 mb-2">Thank you!</Text>
 					<Text className="text-1xl mb-6 mt-10 text-slate-500">Order was success</Text>
-					<ToolTip tooltip="Quay lại trang chủ">
-						<Button size="medium" className="mt-4" onClick={() => navigate("/")}>
-							Back to Home
-						</Button>
-					</ToolTip>
+					<Button size="medium" className="mt-4" onClick={() => navigate("/")}>
+						Back to Home
+					</Button>
 				</Box>
 			</Page>
 		</>
