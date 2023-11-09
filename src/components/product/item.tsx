@@ -20,8 +20,8 @@ export const ProductItem: FC<{ product: ProductItems }> = ({ product }) => {
 							className="absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover object-center rounded-lg bg-skeleton"
 						/>
 					</Box>
-					<Text>{product.fields.name}</Text>
-					<Text size="xxSmall" className="text-gray pb-2">
+					<Text className="whitespace-nowrap truncate">{product.fields.name}</Text>
+					<Text size="xxSmall" className="text-primary pb-2">
 						<DisplayPrice>{product.fields.price}</DisplayPrice>
 					</Text>
 				</div>
