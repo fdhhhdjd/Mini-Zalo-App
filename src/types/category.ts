@@ -45,7 +45,11 @@ export interface InitialInterface {
 }
 
 export type CategoriesAction<T> = {
-	type: typeof TYPES.GET_CATEGORY_PENDING | typeof TYPES.GET_CATEGORY_SUCCESS | typeof TYPES.GET_CATEGORY_ERROR;
+	type:
+		| typeof TYPES.GET_CATEGORY_PENDING
+		| typeof TYPES.GET_CATEGORY_SUCCESS
+		| typeof TYPES.GET_CATEGORY_ERROR
+		| typeof TYPES.SET_CATEGORY_UNMOUNT;
 	payload?: T;
 };
 export type CategoryId = string;

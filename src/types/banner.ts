@@ -26,7 +26,11 @@ export interface InitialInterface {
 }
 
 export type BannerAction<T> = {
-	type: typeof TYPES.GET_BANNER_PENDING | typeof TYPES.GET_BANNER_SUCCESS | typeof TYPES.GET_BANNER_ERROR;
+	type:
+		| typeof TYPES.GET_BANNER_PENDING
+		| typeof TYPES.GET_BANNER_SUCCESS
+		| typeof TYPES.GET_BANNER_ERROR
+		| typeof TYPES.SET_BANNER_UNMOUNT;
 	payload?: T;
 };
 

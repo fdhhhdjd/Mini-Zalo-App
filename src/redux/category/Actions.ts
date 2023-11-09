@@ -28,6 +28,12 @@ const getDataCategoriesError = (error: Error) => {
 	} as const;
 };
 
+export const setDataCategoriesUnmount = () => {
+	return {
+		type: TYPES.SET_CATEGORY_UNMOUNT
+	} as const;
+};
+
 // Action thunk Get dagetDataCategoriesholder
 export const getCategoriesInitiate = (): any => {
 	return async (dispatch: (arg0: { type: TYPES; payload?: CategoriesItem | Error }) => void) => {

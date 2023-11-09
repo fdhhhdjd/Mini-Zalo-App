@@ -4,7 +4,7 @@ import useStoreBanner from "hooks/useSelectorBanner";
 import React from "react";
 import { useDispatch } from "react-redux";
 //* IMPORT
-import { getBannerInitiate } from "redux/banner/Actions";
+import { getBannerInitiate, setDataBannerUnmount } from "redux/banner/Actions";
 import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Box } from "zmp-ui";
@@ -16,6 +16,9 @@ export const Banner: React.FC = () => {
 
 	React.useEffect(() => {
 		dispatch(getBannerInitiate());
+		return () => {
+			dispatch(setDataBannerUnmount());
+		};
 	}, []);
 
 	return (

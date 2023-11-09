@@ -34,6 +34,13 @@ const CategoriesReducer = (state: InitialInterface = initialState, action: Categ
 				error: payload,
 				isLoading: false
 			};
+		// Todo: 2. Success
+		case TYPES.SET_CATEGORY_UNMOUNT:
+			return {
+				isLoading: false,
+				categories: [],
+				error: null
+			};
 		default:
 			return {
 				...state

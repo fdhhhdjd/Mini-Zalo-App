@@ -28,6 +28,12 @@ const getDataBannerError = (error: Error) => {
 	} as const;
 };
 
+export const setDataBannerUnmount = () => {
+	return {
+		type: TYPES.SET_BANNER_UNMOUNT,
+	} as const;
+};
+
 // Action thunk Get data for Banner
 export const getBannerInitiate = (): any => {
 	return async (dispatch: (arg0: { type: TYPES; payload?: BannerItem | Error }) => void) => {

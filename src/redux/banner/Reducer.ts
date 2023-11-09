@@ -33,6 +33,12 @@ const BannerReducer = (state: InitialInterface = initialState, action: BannerAct
 				error: payload,
 				isLoading: false
 			};
+		case TYPES.SET_BANNER_UNMOUNT:
+			return {
+				isLoading: false,
+				banners: [],
+				error: null
+		};
 		default:
 			return {
 				...state
