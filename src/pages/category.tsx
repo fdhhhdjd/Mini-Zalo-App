@@ -1,23 +1,29 @@
 import { ProductItem } from "components/product/item";
 import useGetProducts from "hooks/useGetProductCategory";
 import useStoreCategories from "hooks/useSelectorCategories";
-import React, { FC, Suspense, useEffect } from "react";
+import React, { FC, Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getCategoriesInitiate } from "redux/category/Actions";
 import { CategoriesItem } from "types/category";
 import { Box, Header, Page, Tabs, Text } from "zmp-ui";
 export const CategoryPicker: FC = () => {
+	const location = useLocation();
+	const [activeKey, setActiveKey] = useState(location.state?.categoryId);
 	const dispatch = useDispatch();
 	const { categories } = useStoreCategories() as { categories: CategoriesItem[] };
-	const location = useLocation();
 	useEffect(() => {
 		dispatch(getCategoriesInitiate());
 	}, []);
-	// const categories = useRecoilValue(categoriesState);
-	const selectedCategory = location.state?.categoryId;
+
 	return (
-		<Tabs scrollable defaultActiveKey={selectedCategory} className="category-tabs">
+		<Tabs
+			scrollable
+			activeKey={activeKey}
+			defaultActiveKey={activeKey}
+			className="category-tabs"
+			onChange={(active: string) => setActiveKey(active)}
+		>
 			{categories?.map((item) => (
 				<Tabs.Tab key={item.id} label={item.fields.name}>
 					<Suspense>
