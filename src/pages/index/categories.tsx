@@ -25,7 +25,12 @@ export const CategoriesDev: FC = () => {
 
 	const gotoCategory = (categoryId: string) => {
 		setSelectedCategoryId(categoryId);
-		navigate("/category");
+
+		navigate("/category", {
+			state: {
+				categoryId
+			}
+		});
 	};
 	const checkLengthCategory = Array.isArray(categories) && categories.length > 0 ? categories.length : 6;
 
@@ -37,8 +42,8 @@ export const CategoriesDev: FC = () => {
 				Array.isArray(categories) &&
 				categories.map((category, i) => (
 					// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-					<div key={i} onClick={() => gotoCategory(category?.fields?.id)} className="w-full">
-						<div className="flex flex-col space-x-2 items-center rounded-full">
+					<div key={i} onClick={() => gotoCategory(category?.id)} className="w-full">
+						<div className="flex flex-col items-center rounded-full">
 							<img className="w-12 h-12 rounded-full" src={category.fields.icon} />
 							<Text size="xxSmall" className="text-gray mt-1 mb-1">
 								{category.fields.name}

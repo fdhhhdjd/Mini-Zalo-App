@@ -67,7 +67,10 @@ export const CartItems: FC = () => {
 										</Text>
 										<ToolTip tooltip="Xoá">
 											<Button
-												onClick={() => removeItem(item)}
+												onClick={(e) => {
+													e.stopPropagation();
+													removeItem(item);
+												}}
 												variant="tertiary"
 												icon={<Icon icon="zi-close-circle" />}
 											/>
