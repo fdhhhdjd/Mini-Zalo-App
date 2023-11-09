@@ -21,7 +21,7 @@ export const CartPreview: FC = () => {
 		dispatch(getCartSuccessAction([]));
 
 		setTimeout(() => {
-			navigate("/success");
+			navigate("/success", { state: "Success" });
 			setIsLoading(false);
 		}, 1500);
 	}, []);

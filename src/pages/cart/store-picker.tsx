@@ -18,6 +18,7 @@ export const StorePicker: FC = () => {
 
 	const handleSelectedStoreIndex = (index: number) => {
 		setSelected(store[index]);
+		setVisible(false);
 	};
 
 	useEffect(() => {

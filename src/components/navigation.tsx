@@ -37,6 +37,7 @@ export const Navigation: FC = () => {
 	const location = useLocation();
 
 	const isNoBottomNav = useMemo(() => {
+		setActiveTab(location.pathname);
 		return NO_BOTTOM_NAVIGATION_PAGES.includes(location.pathname);
 	}, [location]);
 

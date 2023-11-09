@@ -11,6 +11,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const RoutesWithTransition: React.FC = () => {
 	const location = useLocation();
+
 	return (
 		<>
 			<TransitionGroup>
