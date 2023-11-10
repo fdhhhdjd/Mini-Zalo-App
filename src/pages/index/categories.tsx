@@ -7,7 +7,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { useSetRecoilState } from "recoil";
-import { getCategoriesInitiate, setDataCategoriesUnmount } from "redux/category/Actions";
+import { getCategoriesInitiate } from "redux/category/Actions";
 import { selectedCategoryIdState } from "state";
 import { Text } from "zmp-ui";
 
@@ -18,9 +18,6 @@ export const CategoriesDev: FC = () => {
 
 	useEffect(() => {
 		dispatch(getCategoriesInitiate());
-		return () => {
-			dispatch(setDataCategoriesUnmount());
-		};
 	}, []);
 
 	const navigate = useNavigate();

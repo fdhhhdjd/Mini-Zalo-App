@@ -2,7 +2,7 @@ import useNotify from "hooks/useSelectorNotify";
 import { FC, useEffect } from "react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getNotifyInitiate, setDataNotifyUnmount } from "redux/notification/Actions";
+import { getNotifyInitiate } from "redux/notification/Actions";
 import { NotifyItem } from "types/Notify";
 import { convertIconStatus } from "utils/icon";
 import { Box, Text } from "zmp-ui";
@@ -17,9 +17,6 @@ const NotificationList: FC = () => {
 
 	useEffect(() => {
 		dispatch(getNotifyInitiate());
-		return () => {
-			dispatch(setDataNotifyUnmount());
-		};
 	}, []);
 
 	return (

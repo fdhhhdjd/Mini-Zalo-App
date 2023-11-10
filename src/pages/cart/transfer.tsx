@@ -2,7 +2,7 @@ import { PaymentMethodSkeleton } from "components/skeletons";
 import usePaymentMethod from "hooks/useSelectorPaymentMethod";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { clearDataPaymentMethod, getPaymentMethodInitiate } from "redux/payment-method/Actions";
+import { getPaymentMethodInitiate } from "redux/payment-method/Actions";
 import { Box, Radio, Text } from "zmp-ui";
 
 export const Transfer = () => {
@@ -17,9 +17,6 @@ export const Transfer = () => {
 
 	useEffect(() => {
 		dispatch(getPaymentMethodInitiate());
-		return () => {
-			dispatch(clearDataPaymentMethod());
-		};
 	}, []);
 
 	return (
