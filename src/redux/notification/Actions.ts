@@ -28,6 +28,13 @@ const getDataNotifyError = (error: Error) => {
 	} as const;
 };
 
+//* Set Unmount for thunk
+export const setDataNotifyUnmount = () => {
+	return {
+		type: TYPES.SET_NOTIFICATION_UNMOUNT,
+	} as const;
+};
+
 // Action thunk Get data for Store
 export const getNotifyInitiate = (): any => {
 	return async (dispatch: (arg0: { type: TYPES; payload?: NotifyItem | Error }) => void) => {

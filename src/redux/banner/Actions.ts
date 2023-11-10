@@ -28,6 +28,7 @@ const getDataBannerError = (error: Error) => {
 	} as const;
 };
 
+//* Set Unmount for thunk
 export const setDataBannerUnmount = () => {
 	return {
 		type: TYPES.SET_BANNER_UNMOUNT,

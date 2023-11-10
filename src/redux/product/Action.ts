@@ -28,6 +28,13 @@ const getDataProductError = (error: Error) => {
 	} as const;
 };
 
+//* set unmount for thunk
+export const setDataProductUnmount = () => {
+	return {
+		type: TYPES.SET_PRODUCT_UNMOUNT,
+	} as const;
+};
+
 //* Action thunk get data for product
 export const getProductInitiate = (): any => {
 	return async (dispatch: (arg0: { type: TYPES; payload?: ProductItems | Error }) => void) => {

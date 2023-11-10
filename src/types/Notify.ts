@@ -29,7 +29,8 @@ export type NotifyAction<T> = {
 	type:
 		| typeof TYPES.GET_NOTIFICATION_PENDING
 		| typeof TYPES.GET_NOTIFICATION_SUCCESS
-		| typeof TYPES.GET_NOTIFICATION_ERROR;
+		| typeof TYPES.GET_NOTIFICATION_ERROR
+		| typeof TYPES.SET_NOTIFICATION_UNMOUNT;
 	payload?: T;
 };
 

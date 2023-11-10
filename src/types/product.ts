@@ -107,7 +107,11 @@ export interface ProductItem {
 }
 
 export type ProductAction<T> = {
-	type: typeof TYPES.GET_PRODUCT_PENDING | typeof TYPES.GET_PRODUCT_SUCCESS | typeof TYPES.GET_PRODUCT_ERROR;
+	type:
+		| typeof TYPES.GET_PRODUCT_PENDING
+		| typeof TYPES.GET_PRODUCT_SUCCESS
+		| typeof TYPES.GET_PRODUCT_ERROR
+		| typeof TYPES.SET_PRODUCT_UNMOUNT;
 	payload?: T;
 };
 

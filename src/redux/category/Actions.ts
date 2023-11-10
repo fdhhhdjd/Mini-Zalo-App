@@ -28,6 +28,7 @@ const getDataCategoriesError = (error: Error) => {
 	} as const;
 };
 
+//* Set Unmount for thunk
 export const setDataCategoriesUnmount = () => {
 	return {
 		type: TYPES.SET_CATEGORY_UNMOUNT

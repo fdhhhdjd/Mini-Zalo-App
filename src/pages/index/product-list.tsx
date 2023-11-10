@@ -4,7 +4,7 @@ import { ProductItemSkeleton } from "components/skeletons";
 import useStoreProduct from "hooks/useSelectorProduct";
 import React, { FC, Suspense } from "react";
 import { useDispatch } from "react-redux";
-import { getProductInitiate } from "redux/product/Action";
+import { getProductInitiate, setDataProductUnmount } from "redux/product/Action";
 import { Box } from "zmp-ui";
 
 export const ProductListContent: FC = () => {
@@ -13,6 +13,9 @@ export const ProductListContent: FC = () => {
 	const dispatch = useDispatch();
 	React.useEffect(() => {
 		dispatch(getProductInitiate());
+		return () => {
+			dispatch(setDataProductUnmount());
+		};
 	}, []);
 
 	return (

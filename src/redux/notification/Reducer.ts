@@ -33,6 +33,13 @@ const TodoReducer = (state: InitialInterface = initialState, action: NotifyActio
 				error: payload,
 				loading: false
 			};
+		// Todo: 4. Error unmount
+		case TYPES.SET_NOTIFICATION_UNMOUNT:
+			return {
+				isLoading: false,
+				notify: [],
+				error: null
+			};
 		default:
 			return {
 				...state

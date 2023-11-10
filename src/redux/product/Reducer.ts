@@ -54,10 +54,17 @@ const ProductReducer = (state: InitialProdInterface = initialState, action: Prod
 				products: productsWithParsedVariants,
 				isLoading: false
 			};
+
 		case TYPES.GET_PRODUCT_ERROR:
 			return {
 				...state,
 				error: payload,
+				isLoading: false
+			};
+		case TYPES.SET_PRODUCT_UNMOUNT:
+			return {
+				products: [],
+				error: null,
 				isLoading: false
 			};
 		default:
