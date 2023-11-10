@@ -20,9 +20,13 @@ Public template for building a coffee shop on Zalo Mini App. Main features:
 -   Manage your cart and delivery options.
 -   View customer profile and membership.
 
-|                      Demo                       |                  Entrypoint                  |
-| :---------------------------------------------: | :------------------------------------------: |
-| <img src="./docs/preview.webp" alt="Home page"> | <img src="./docs/qr.webp" alt="Entry point"> |
+|                      Demo                       | 
+| :---------------------------------------------: |
+| <img src="./docs/preview.webp" alt="Home page"> |
+
+|                  Entrypoint                  |
+| :------------------------------------------: |
+| <img src="https://github.com/linhnguyen-gt/mini-zalo-demo/assets/43808684/1d98a645-2ae3-40ae-a216-632b36c3e176" alt="Entry point"> |
 
 ## Setup
 
