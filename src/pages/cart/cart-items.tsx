@@ -5,7 +5,7 @@ import { ListRenderer } from "components/list-renderer";
 import { ProductPicker } from "components/product/picker";
 import ToolTip from "components/tooltip";
 import useSelectorCart from "hooks/useSelectorCart";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCartSuccessAction } from "redux/cart/Actions";
 import { CartItem } from "types/cart";
@@ -17,6 +17,8 @@ export const CartItems: FC = () => {
 	const productListInCart = cart.cart;
 	const dispatch = useDispatch();
 	const [editingItem, setEditingItem] = useState<CartItem | undefined>();
+	const timeOutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
 	const removeItem = (itemToRemove: CartItem) => {
 		const updatedCartData = productListInCart.filter((item) => item !== itemToRemove);
 		dispatch(getCartSuccessAction(updatedCartData));
@@ -25,12 +27,35 @@ export const CartItems: FC = () => {
 		// Update the cart by assigning an empty list
 		dispatch(getCartSuccessAction([]));
 	};
+
+	const scrollToTop = () => {
+		const element = document.getElementById("top-of-page");
+		if (element) {
+			element.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+				inline: "nearest"
+			});
+		}
+	};
+	useEffect(() => {
+		timeOutRef.current = setTimeout(() => {
+			scrollToTop();
+		}, 800);
+
+		return () => {
+			if (timeOutRef.current) {
+				clearTimeout(timeOutRef.current);
+			}
+		};
+	}, []);
+
 	useEffect(() => {
 		saveToLocalStorage(KEY_LOCAL_STORAGE.KEY_CART, JSON.stringify(productListInCart));
 	}, [productListInCart]);
 
 	return (
-		<Box className="py-3 px-4">
+		<Box className="py-3 px-4" id="top-of-page">
 			{productListInCart.length > 0 ? (
 				<React.Fragment>
 					<ProductPicker product={editingItem?.product} selected={editingItem}>
