@@ -9,3 +9,9 @@ export const parseData = (inputString: string) => {
 		console.error("Lỗi khi phân tích chuỗi JSON:", error);
 	}
 };
+
+export const truncateText = (str: string) => {
+	if (str.length < 25) return str;
+
+	return str.substring(0, 25) + "...";
+};

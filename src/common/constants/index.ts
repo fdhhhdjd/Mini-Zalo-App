@@ -9,7 +9,8 @@ export const TABLE = {
 	ORDER: "tbl1yFvIS5tZviAwY",
 	BANNER: "tblKBzzfkCqqQgetM",
 	STORE: "tblyBzBvHAMKTC4DQ",
-	NOTIFY: "tblMS4cRevyyru2Lj"
+	NOTIFY: "tblMS4cRevyyru2Lj",
+	PAYMENT_METHOD: "tblUcfevEMxE1vr6C"
 };
 
 export const BASE_ID = "apphCRzZ88qQxnHGM";

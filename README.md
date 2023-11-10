@@ -1,4 +1,4 @@
-# ZaUI Coffee
+# Coffee Dev
 
 <p style="display: flex; flex-wrap: wrap; gap: 4px">
   <a href="https://github.com/zalo-MiniApp/zaui-coffee/actions/workflows/zalo-mini-app.yml" style="display: flex">
@@ -14,11 +14,11 @@
 
 Public template for building a coffee shop on Zalo Mini App. Main features:
 
-- View coffee shop details and menus.
-- Order coffee and snacks with customizable size options.
-- Notifications management.
-- Manage your cart and delivery options.
-- View customer profile and membership.
+-   View coffee shop details and menus.
+-   Order coffee and snacks with customizable size options.
+-   Notifications management.
+-   Manage your cart and delivery options.
+-   View customer profile and membership.
 
 |                      Demo                       |                  Entrypoint                  |
 | :---------------------------------------------: | :------------------------------------------: |
@@ -29,7 +29,7 @@ Public template for building a coffee shop on Zalo Mini App. Main features:
 ### Using Zalo Mini App Studio
 
 1. [Install Zalo Mini App Studio](https://mini.zalo.me/docs/dev-tools)
-1. Click on New project > Enter your Mini App ID > Choose ZaUI Coffee template
+1. Click on New project > Enter your Mini App ID > Choose Coffee Dev template
 1. Wait until the generated project is ready and click the Start button to run the mini app 🚀
 
 ### Using Visual Studio Code
@@ -39,21 +39,22 @@ Public template for building a coffee shop on Zalo Mini App. Main features:
 1. Download or clone this repository
 1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
 1. Start dev server using `zmp-cli`
    If you're using `developer`:
-  
-  ```bash
-   npm run dev
-   ```
 
-   If you're using `developer`:
-   ```bash
-   npm start
-   ```
+```bash
+ npm run dev
+```
+
+If you're using `developer`:
+
+```bash
+npm start
+```
 
 1. Open `localhost:3000` on your browser and start coding 🔥
 
@@ -66,12 +67,12 @@ Public template for building a coffee shop on Zalo Mini App. Main features:
 
 1. Deploy your mini program to Zalo using the mini app ID created in step 1.
 
-   If you're using `zmp-cli`:
+    If you're using `zmp-cli`:
 
-   ```bash
-   zmp login
-   zmp deploy
-   ```
+    ```bash
+    zmp login
+    zmp deploy
+    ```
 
 1. Scan the QR code using Zalo to preview your mini program.
 
@@ -81,19 +82,19 @@ The repository contains sample UI components for building your application. You 
 
 Folder structure:
 
-- **`src`**: Contains all the logic source code of your Mini App. Inside the `src` folder:
+-   **`src`**: Contains all the logic source code of your Mini App. Inside the `src` folder:
 
-  - **`components`**: Reusable components written in React.JS.
-  - **`css`**: Stylesheets; pre-processors are also supported.
-  - **`pages`**: A Page is also a component but will act as an entire view and must be registered inside `app.tsx` as a Route (https://mini.zalo.me/docs/zaui/components/router/ZMPRouter/).
-  - **`statics`**: SVG and images that should be imported directly into bundle source code.
-  - **`types`**: Contains TypeScript type and interface declarations.
-  - **`utils`**: Reusable utility functions, such as distance calculation, date and time format, etc.
-  - **`app.ts`**: Entry point of your Mini App.
-  - **`global.d.ts`**: Contains TypeScript declarations for third-party modules and global objects.
-  - **`state.ts`**: State management, containing Recoil's atoms and selectors (https://recoiljs.org/docs/introduction/getting-started#atom).
+    -   **`components`**: Reusable components written in React.JS.
+    -   **`css`**: Stylesheets; pre-processors are also supported.
+    -   **`pages`**: A Page is also a component but will act as an entire view and must be registered inside `app.tsx` as a Route (https://mini.zalo.me/docs/zaui/components/router/ZMPRouter/).
+    -   **`statics`**: SVG and images that should be imported directly into bundle source code.
+    -   **`types`**: Contains TypeScript type and interface declarations.
+    -   **`utils`**: Reusable utility functions, such as distance calculation, date and time format, etc.
+    -   **`app.ts`**: Entry point of your Mini App.
+    -   **`global.d.ts`**: Contains TypeScript declarations for third-party modules and global objects.
+    -   **`state.ts`**: State management, containing Recoil's atoms and selectors (https://recoiljs.org/docs/introduction/getting-started#atom).
 
-- **`app-config.json`**: Global configuration for your Mini App (https://mini.zalo.me/docs/framework/getting-started/app-config).
+-   **`app-config.json`**: Global configuration for your Mini App (https://mini.zalo.me/docs/framework/getting-started/app-config).
 
 The other files (such as `tailwind.config.js`, `vite.config.ts`, `tsconfig.json`, `postcss.config.js`) are configurations for libraries used in your application. Visit the library's documentation to learn how to use them.
 
@@ -105,9 +106,9 @@ Just change the `app.title` property in `app-config.json`:
 
 ```json
 {
-  "app": {
-    "title": "ZaUI Coffee"
-  }
+	"app": {
+		"title": "Coffee Dev"
+	}
 }
 ```
 
@@ -131,22 +132,22 @@ If the returned JSON structure is different from the template, you would need to
 
 ```ts
 export const productsState = selector<Product[]>({
-  key: "products",
-  get: async () => {
-    const response = await fetch("https://dummyjson.com/products");
-    const data = await response.json();
-    return data.products.map(
-      ({ id, title, price, images, description, category }) =>
-        <Product>{
-          id,
-          name: title,
-          price: price,
-          image: images[0],
-          description,
-          categoryId: category,
-        }
-    );
-  },
+	key: "products",
+	get: async () => {
+		const response = await fetch("https://dummyjson.com/products");
+		const data = await response.json();
+		return data.products.map(
+			({ id, title, price, images, description, category }) =>
+				<Product>{
+					id,
+					name: title,
+					price: price,
+					image: images[0],
+					description,
+					categoryId: category
+				}
+		);
+	}
 });
 ```
 

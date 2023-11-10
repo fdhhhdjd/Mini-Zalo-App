@@ -10,6 +10,15 @@ export const ImageSkeleton: FC<HTMLProps<HTMLImageElement>> = ({ className, ...p
 	return <div {...props} className={`bg-skeleton animate-pulse ${className ?? ""}`} />;
 };
 
+export const RadioSkeleton: FC<PropsWithChildren<BodyTextProps>> = ({ className, ...props }) => {
+	return (
+		<div
+			{...props}
+			className={`radio-skeleton bg-skeleton rounded-full w-6 h-6 animate-pulse ${className ?? ""}`}
+		/>
+	);
+};
+
 export const ProductItemSkeleton: FC = () => {
 	return (
 		<div className="space-y-2">
@@ -73,6 +82,24 @@ export const CategoryItemSkeleton: FC<{ numImages: number }> = ({ numImages }) =
 						</TextSkeleton>
 					</div>
 				</div>
+			))}
+		</>
+	);
+};
+
+export const PaymentMethodSkeleton: FC<{ numberMethod: number }> = ({ numberMethod }) => {
+	return (
+		<>
+			{Array.from({ length: numberMethod }).map((_, i) => (
+				<Box className="space-y-2" key={i}>
+					<Box className="flex flex-row items-center justify-between">
+						<Box className="flex flex-row items-center space-x-2">
+							<ImageSkeleton className="w-8 h-8 p-1" />
+							<TextSkeleton size="large">Thanh toán qua zalo pay</TextSkeleton>
+						</Box>
+						<RadioSkeleton size="large" />
+					</Box>
+				</Box>
 			))}
 		</>
 	);
